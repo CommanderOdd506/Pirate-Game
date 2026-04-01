@@ -23,7 +23,8 @@ public class PlayerInput : MonoBehaviour
 
     [Header("Util")]
     public bool pausePressed;
-
+    public float horizontalBoatInputSmoothing = 10f;
+    public float verticalBoatInputSmoothing = 10f;
 
     private bool canInput = true;
     //checking what scene we are in
@@ -44,8 +45,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (!canInput)
             return;
-        move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (move.sqrMagnitude > 1f) move.Normalize();
+        
 
         //disabling inputs based on scene, if it is any scene other than 4 (map scene) you are 3d and can use all abilities
         if(currentScene.buildIndex != 4)
@@ -59,12 +59,33 @@ public class PlayerInput : MonoBehaviour
             aimPressed = Input.GetMouseButton(1);
             dashPressed = Input.GetKeyDown(KeyCode.LeftShift);
             rollPressed = Input.GetKeyDown(KeyCode.LeftControl);
+
+            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (move.sqrMagnitude > 1f) move.Normalize();
         }
         //if you are in map scene, you can only interact and pause as well as move
         else
         {
             interactPressed = Input.GetKeyDown(KeyCode.F);
             pausePressed = Input.GetKeyDown(KeyCode.Escape);
+
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+
+
+            // Only allow movement with forward input
+            if (vertical > 0f)
+            {
+                move = new Vector2(horizontal, vertical);
+
+                if (move.sqrMagnitude > 1f)
+                    move.Normalize();
+            }
+            else
+            {
+                //move = Vector2.Lerp(move, Vector2.zero, 10f * Time.deltaTime);
+                move = new Vector2(Mathf.Lerp(move.x, 0, horizontalBoatInputSmoothing * Time.deltaTime), Mathf.Lerp(move.y, 0, verticalBoatInputSmoothing * Time.deltaTime));
+            }
         }
 
         

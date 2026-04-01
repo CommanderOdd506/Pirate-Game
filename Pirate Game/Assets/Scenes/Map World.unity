@@ -163,6 +163,8 @@ MonoBehaviour:
   aimPressed: 0
   reloadPressed: 0
   pausePressed: 0
+  horizontalBoatInputSmoothing: 10
+  verticalBoatInputSmoothing: 1
 --- !u!114 &74973695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,8 +1327,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 8.53
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
