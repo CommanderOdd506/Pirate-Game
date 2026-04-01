@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -48,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     private float dashCooldownTimer;
     private float rollCooldownTimer;
     private Vector3 abilityDirection;
+    private bool inMapScene;
 
     void Awake()
     {
@@ -59,13 +61,23 @@ public class PlayerMovement : MonoBehaviour
     {
         input = GetComponent<PlayerInput>();
         Cursor.lockState = CursorLockMode.Locked;
+        if(IsInMapScene())
+        {
+            inMapScene = true;
+        }
     }
 
 
-    void Update()
+
+    bool IsInMapScene()
+    {
+        return SceneManager.GetActiveScene().name == "MapScene";
+    }
+
+void Update()
     {
         //Normalize forward and right vectors to remove vertical direction and properly scale horizontal
-        //use cam as a the direcftion reference for 3d platformer environment 
+        //use cam as a the direction reference for 3d platformer environment 
         Vector3 camForward = camera.forward;
         camForward.y = 0f;
         camForward.Normalize();
