@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101217230}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.048639152, y: -0.00000002627782, z: 0.0000000012796452, w: 0.99881643}
+  m_LocalRotation: {x: 0.04863913, y: 0, z: 0, w: 0.99881643}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -893,7 +893,7 @@ MonoBehaviour:
   controller: {fileID: 295546892}
   camera: {fileID: 114028402}
   canSprint: 0
-  walkSpeed: 6
+  walkSpeed: 9
   sprintSpeed: 6.5
   groundStickForce: -5
   gravity: -30
@@ -901,11 +901,11 @@ MonoBehaviour:
   jumpBuffer: 0.06
   coyoteTime: 0.04
   rotationSpeed: 10
-  dashSpeed: 13
+  dashSpeed: 14
   dashDuration: 0.3
   dashCooldown: 0.5
-  rollSpeed: 12
-  rollDuration: 0.6
+  rollSpeed: 13
+  rollDuration: 0.4
   rollCooldown: 1
 --- !u!23 &295546896
 MeshRenderer:
@@ -1339,7 +1339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513225881}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.030511167, y: -0.000000013148354, z: 4.0135859e-10, w: 0.9995344}
+  m_LocalRotation: {x: 0.03051114, y: 0, z: 0, w: 0.9995344}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1418,7 +1418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691528421}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06679902, y: 0, z: 0, w: 0.9977665}
+  m_LocalRotation: {x: 0.066799045, y: 0, z: 0, w: 0.99776644}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
