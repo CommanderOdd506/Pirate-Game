@@ -1,0 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MovingPlatform : MonoBehaviour//, IStasisable
+{
+    [SerializeField] float speed;
+    [SerializeField] Vector3[] points = { };
+
+    int nextPoint = 0;
+    Vector3 startPosition;
+
+    public Vector3 velocity {get; private set; }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        if (points == null || points.Length < 2)
+        {
+            Debug.LogError("Platform needs atleast 2 points to work");
+            return;
+        }
+        startPosition = transform.position;
+        transform.position = currentPoint;
+    }
+
+    Vector3 currentPoint { 
+        get { 
+            if(points == null || points.Length == 0)
+            {
+                return transform.position;
+            }
+
+            return points[nextPoint] + startPosition;
+        } 
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        var newPosition = Vector3.MoveTowards(transform.position, currentPoint, speed * Time.deltaTime);
+
+        if (Vector3.Distance(newPosition, currentPoint) < 0.001)
+        {
+            newPosition = currentPoint;
+
+            nextPoint += 1;
+            nextPoint %= points.Length;
+
+            
+        }
+
+        velocity = (newPosition - transform.position) / Time.deltaTime;
+
+        transform.position = newPosition;
+    }
+}
