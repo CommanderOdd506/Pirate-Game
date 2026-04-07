@@ -9,11 +9,14 @@ public class PlayerInput : MonoBehaviour
     public bool sprintHeld;
 
     public bool interactPressed;
-    public bool timePressed;
 
     public bool jumpPressed;
     public bool dashPressed;
     public bool rollPressed;
+
+    [Header("Stasis")]
+    public bool stasisActivatePressed;
+    public bool stasisSearchPressed;
 
     [Header("Mouse")]
     public bool firePressed;
@@ -60,7 +63,8 @@ public class PlayerInput : MonoBehaviour
             aimPressed = Input.GetMouseButton(1);
             dashPressed = Input.GetKeyDown(KeyCode.LeftShift);
             rollPressed = Input.GetKeyDown(KeyCode.LeftControl);
-            timePressed = Input.GetKey(KeyCode.Tab);
+            stasisActivatePressed = Input.GetMouseButton(2);
+            stasisSearchPressed = Input.GetKey(KeyCode.C);
 
             move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (move.sqrMagnitude > 1f) move.Normalize();
