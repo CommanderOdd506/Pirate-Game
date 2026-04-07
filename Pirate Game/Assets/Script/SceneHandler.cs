@@ -67,6 +67,9 @@ public class SceneHandler : MonoBehaviour
 		SceneManager.LoadSceneAsync(2);
 
 		Resume();
+
+		Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 	}
 
 	public void LevelThree()

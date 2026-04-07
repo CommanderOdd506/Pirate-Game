@@ -2029,7 +2029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 295546894}
-  sceneHandler: {fileID: 0}
+  sceneHandler: {fileID: 2038385394}
 --- !u!54 &1061227998
 Rigidbody:
   m_ObjectHideFlags: 0
