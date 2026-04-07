@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour//, IStasisable
+public class MovingPlatform : MonoBehaviour, IStasisable
 {
     [SerializeField] float speed;
     [SerializeField] Vector3[] points = { };
@@ -12,6 +12,7 @@ public class MovingPlatform : MonoBehaviour//, IStasisable
 
     public Vector3 velocity {get; private set; }
 
+    public bool isStasised = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,8 @@ public class MovingPlatform : MonoBehaviour//, IStasisable
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (isStasised) return;
+
         var newPosition = Vector3.MoveTowards(transform.position, currentPoint, speed * Time.deltaTime);
 
         if (Vector3.Distance(newPosition, currentPoint) < 0.001)
@@ -53,5 +56,17 @@ public class MovingPlatform : MonoBehaviour//, IStasisable
         velocity = (newPosition - transform.position) / Time.deltaTime;
 
         transform.position = newPosition;
+    }
+
+    //stasis implementation
+
+    public void BeginStasis()
+    {
+        isStasised = true;
+    }
+
+    public void EndStasis()
+    {
+        isStasised = false;
     }
 }
