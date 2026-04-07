@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map World.unity
     guid: f5a0ed1a81959cf4e9e64ba3425ce9da
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: fbcddf2e97004f3449f58bf34ec6f5a0
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: d1b8cce3858fbed4882c71aa0d62d36e
   m_configObjects: {}
