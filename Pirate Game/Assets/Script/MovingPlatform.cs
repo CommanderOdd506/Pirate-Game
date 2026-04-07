@@ -7,6 +7,10 @@ public class MovingPlatform : MonoBehaviour, IStasisable
     [SerializeField] float speed;
     [SerializeField] Vector3[] points = { };
 
+    [SerializeField] Renderer rend;
+    [SerializeField] Material normalMat;
+    [SerializeField] Material highlightMat;
+
     int nextPoint = 0;
     Vector3 startPosition;
 
@@ -68,5 +72,15 @@ public class MovingPlatform : MonoBehaviour, IStasisable
     public void EndStasis()
     {
         isStasised = false;
+    }
+
+    public void OnStasisTargeted()
+    {
+        rend.material = highlightMat;
+    }
+
+    public void OnStasisUntargeted()
+    {
+        rend.material = normalMat;
     }
 }

@@ -14,6 +14,10 @@ public class PlayerInput : MonoBehaviour
     public bool dashPressed;
     public bool rollPressed;
 
+    [Header("Stasis")]
+    public bool stasisActivatePressed;
+    public bool stasisSearchPressed;
+
     [Header("Mouse")]
     public bool firePressed;
     public bool aimPressed;
@@ -59,6 +63,8 @@ public class PlayerInput : MonoBehaviour
             aimPressed = Input.GetMouseButton(1);
             dashPressed = Input.GetKeyDown(KeyCode.LeftShift);
             rollPressed = Input.GetKeyDown(KeyCode.LeftControl);
+            stasisActivatePressed = Input.GetMouseButton(2);
+            stasisSearchPressed = Input.GetKey(KeyCode.C);
 
             move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (move.sqrMagnitude > 1f) move.Normalize();
