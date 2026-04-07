@@ -19,6 +19,7 @@ public class PlayerStasisManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        FindStasisTarget();
         //use find stasis target if input 
         //then use otheer input to activate stasis 
     }
