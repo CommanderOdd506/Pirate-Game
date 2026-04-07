@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour
     public bool sprintHeld;
 
     public bool interactPressed;
+    public bool timePressed;
 
     public bool jumpPressed;
     public bool dashPressed;
@@ -59,6 +60,7 @@ public class PlayerInput : MonoBehaviour
             aimPressed = Input.GetMouseButton(1);
             dashPressed = Input.GetKeyDown(KeyCode.LeftShift);
             rollPressed = Input.GetKeyDown(KeyCode.LeftControl);
+            timePressed = Input.GetKey(KeyCode.Tab);
 
             move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (move.sqrMagnitude > 1f) move.Normalize();
