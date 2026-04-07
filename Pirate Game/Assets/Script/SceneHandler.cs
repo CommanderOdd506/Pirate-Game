@@ -5,92 +5,48 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-	public PlayerInput playerInput;
-	private bool isPaused = false;
-	public GameObject returnButton;
-
-	private void Start()
-	{
-		returnButton.SetActive(false);
-	}
-
-	private void Update()
-	{
-		if(playerInput.pausePressed)
-		{
-			if(isPaused)
-				Resume();
-
-			else
-				Pause();
-		}
-	}
-
-	private void Pause()
-	{
-		Time.timeScale = 0f;
-		isPaused = true;
-
-		returnButton.SetActive(true);
-
-		Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-	}
-
-	private void Resume()
-	{
-		Time.timeScale = 1;
-		isPaused = false;
-
-		returnButton.SetActive(false);
-
-		Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-	}
+	public TimeManager timeManager;
 
 	public void HubWorld()
 	{
 		SceneManager.LoadSceneAsync(0);
 
-		Resume();
+		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
 
 	public void LevelOne()
 	{
 		SceneManager.LoadSceneAsync(1);
 
-		Resume();
+		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
 
 	public void LevelTwo()
 	{
 		SceneManager.LoadSceneAsync(2);
 
-		Resume();
-
-		Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
 
 	public void LevelThree()
 	{
 		SceneManager.LoadSceneAsync(3);
 
-		Resume();
+		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
 
 	public void MapWorld()
 	{
 		SceneManager.LoadSceneAsync(4);
 
-		Resume();
+		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
 
 	public void Settings()
 	{
 		SceneManager.LoadSceneAsync(5);
 
-		Resume();
+		SceneManager.sceneLoaded += OnSceneLoaded;
 
 		Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -100,10 +56,17 @@ public class SceneHandler : MonoBehaviour
 	{
 		SceneManager.LoadSceneAsync(6);
 
-		Resume();
+		SceneManager.sceneLoaded += OnSceneLoaded;
 
 		Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+	}
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+		timeManager = FindObjectOfType<TimeManager>();
+
+		timeManager.Resume();
 	}
 
 	public void QuitGame()
