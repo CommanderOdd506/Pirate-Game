@@ -10,7 +10,7 @@ public class SceneHandler : MonoBehaviour
 	public void LoadScene(int index)
 	{
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(index);
+        SceneManager.LoadSceneAsync(index);
     }
 	public void HubWorld()
 	{
