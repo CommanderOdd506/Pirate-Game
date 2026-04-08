@@ -7,66 +7,54 @@ public class SceneHandler : MonoBehaviour
 {
 	public TimeManager timeManager;
 
+	public void LoadScene(int index)
+	{
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(index);
+    }
 	public void HubWorld()
 	{
-		SceneManager.LoadSceneAsync(0);
-
-		SceneManager.sceneLoaded += OnSceneLoaded;
+        LoadScene(0);
 	}
 
 	public void LevelOne()
 	{
-		SceneManager.LoadSceneAsync(1);
-
-		SceneManager.sceneLoaded += OnSceneLoaded;
+        LoadScene(1);
 	}
 
 	public void LevelTwo()
 	{
-		SceneManager.LoadSceneAsync(2);
-
-		SceneManager.sceneLoaded += OnSceneLoaded;
+        LoadScene(2);
 	}
 
 	public void LevelThree()
 	{
-		SceneManager.LoadSceneAsync(3);
-
-		SceneManager.sceneLoaded += OnSceneLoaded;
+        LoadScene(3);
 	}
 
 	public void MapWorld()
 	{
-		SceneManager.LoadSceneAsync(4);
-
-		SceneManager.sceneLoaded += OnSceneLoaded;
+        LoadScene(4);
 	}
 
 	public void Settings()
 	{
-		SceneManager.LoadSceneAsync(5);
-
-		SceneManager.sceneLoaded += OnSceneLoaded;
-
-		Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+		LoadScene(5);
 	}
 
 	public void MainMenu()
 	{
-		SceneManager.LoadSceneAsync(6);
-
-		SceneManager.sceneLoaded += OnSceneLoaded;
-
-		Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+		LoadScene(6);
 	}
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		timeManager = FindObjectOfType<TimeManager>();
-
-		timeManager.Resume();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        timeManager = FindObjectOfType<TimeManager>();
+        if (timeManager != null)
+        {
+            timeManager.Resume();
+        }
 	}
 
 	public void QuitGame()

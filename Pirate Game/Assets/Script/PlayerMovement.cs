@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private float rollCooldownTimer;
     private Vector3 abilityDirection;
     private bool inMapScene;
+    private bool canDoubleJump;
 
     void Awake()
     {
@@ -103,7 +104,10 @@ void Update()
         dashCooldownTimer -= Time.deltaTime;
         rollCooldownTimer -= Time.deltaTime;
 
-       
+       if(isGrounded && !canDoubleJump)
+        {
+            canDoubleJump = true;
+        }
 
         //horizontal move
 
@@ -160,6 +164,12 @@ void Update()
         bool bufferedJump = _timeSinceJumpPressed <= jumpBuffer;
         if (bufferedJump && (isGrounded || canCoyoteJump))
         {
+            _timeSinceJumpPressed = jumpBuffer + 1f;
+            _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
+        }
+        else if(bufferedJump && canDoubleJump)
+        {
+            canDoubleJump = false;
             _timeSinceJumpPressed = jumpBuffer + 1f;
             _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
         }
