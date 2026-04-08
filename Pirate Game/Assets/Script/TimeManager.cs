@@ -35,7 +35,7 @@ public class TimeManager : MonoBehaviour
 				Pause();
 		}
 
-		if (playerInput.timePressed && !isPaused)
+		if (playerInput.stasisSearchPressed && !isPaused)
 		{
 			targetTimeScale = slowEffect;
 			isSlowed = true;

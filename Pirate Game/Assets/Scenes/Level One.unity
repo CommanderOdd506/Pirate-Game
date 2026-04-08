@@ -580,7 +580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &94690163
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -1607,6 +1607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0428c84e4c222224eaa91a3877321d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeManager: {fileID: 0}
 --- !u!4 &728379359
 Transform:
   m_ObjectHideFlags: 0
@@ -1894,7 +1895,7 @@ Transform:
   m_GameObject: {fileID: 749510866}
   serializedVersion: 2
   m_LocalRotation: {x: 0.048639145, y: -0.0000000037208816, z: 1.8119496e-10, w: 0.99881643}
-  m_LocalPosition: {x: 0, y: 7.8, z: -291.3}
+  m_LocalPosition: {x: -242, y: 7.8, z: -264}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2171,6 +2172,10 @@ MonoBehaviour:
   points:
   - {x: 0, y: 30, z: 0}
   - {x: 0, y: 0, z: 0}
+  rend: {fileID: 0}
+  normalMat: {fileID: 0}
+  highlightMat: {fileID: 0}
+  isStasised: 0
 --- !u!65 &1099191014
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2788,7 +2793,7 @@ Transform:
   m_GameObject: {fileID: 1639268651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.8, z: -291.3}
+  m_LocalPosition: {x: -242, y: 7.8, z: -264}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2886,6 +2891,8 @@ MonoBehaviour:
   jumpPressed: 0
   dashPressed: 0
   rollPressed: 0
+  stasisActivatePressed: 0
+  stasisSearchPressed: 0
   firePressed: 0
   aimPressed: 0
   reloadPressed: 0
@@ -2980,7 +2987,7 @@ Transform:
   m_GameObject: {fileID: 1706955258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.3, z: -283.3}
+  m_LocalPosition: {x: -242, y: 5.3, z: -256}
   m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children:
