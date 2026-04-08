@@ -159,6 +159,8 @@ MonoBehaviour:
   jumpPressed: 0
   dashPressed: 0
   rollPressed: 0
+  stasisActivatePressed: 0
+  stasisSearchPressed: 0
   firePressed: 0
   aimPressed: 0
   reloadPressed: 0
@@ -702,6 +704,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 74973694}
+  isPaused: 0
+  slowEffect: 0.5
+  isSlowed: 0
+  transitionSpeed: 4
   returnButton: {fileID: 1293379637}
 --- !u!4 &596597600
 Transform:
@@ -1286,7 +1292,7 @@ GameObject:
   - component: {fileID: 1293379640}
   - component: {fileID: 1293379639}
   m_Layer: 5
-  m_Name: Back to Menu
+  m_Name: Back to Hub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1358,7 +1364,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1974605593}
         m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: HubWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1516,7 +1522,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back to Menu
+  m_text: Back to Hub
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

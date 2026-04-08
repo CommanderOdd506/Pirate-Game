@@ -55,6 +55,28 @@ public class SceneHandler : MonoBehaviour
         {
             timeManager.Resume();
         }
+
+		//locks or unlocks cursor after load
+		if (scene.buildIndex == 5 || scene.buildIndex == 6) //settings + main menu
+		{
+			MouseUnlock();
+		}
+		else
+		{
+			MouseLock();
+		}
+	}
+
+	void MouseUnlock()
+	{
+		Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+	}
+
+	void MouseLock()
+	{
+		Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 	}
 
 	public void QuitGame()
