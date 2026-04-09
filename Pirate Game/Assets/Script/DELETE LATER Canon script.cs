@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -14,15 +13,16 @@ public class DELETELATERCanonscript : MonoBehaviour
     public TextMeshProUGUI interactText;
 
     private GameObject player;
-    private Rigidbody playerRb;
+    private CharacterController controller;
     private MonoBehaviour playerMovement;
 
-    private bool playerInside = false;
     private bool isLoaded = false;
     private bool isFlying = false;
 
     private LineRenderer line;
-    private CharacterController controller;
+
+    private Vector3 currentVelocity;
+    private float gravity = -9.81f;
 
     private void Start()
     {
@@ -39,7 +39,6 @@ public class DELETELATERCanonscript : MonoBehaviour
         {
             DrawArc();
 
-            // Show UI while loaded
             if (interactUI != null)
             {
                 interactUI.SetActive(true);
@@ -56,6 +55,11 @@ public class DELETELATERCanonscript : MonoBehaviour
             if (interactUI != null)
                 interactUI.SetActive(false);
         }
+
+        if (isFlying)
+        {
+            HandleFlight();
+        }
     }
 
     void LoadPlayer()
@@ -63,9 +67,6 @@ public class DELETELATERCanonscript : MonoBehaviour
         isLoaded = true;
 
         controller.enabled = false;
-
-        playerRb.velocity = Vector3.zero;
-        playerRb.isKinematic = true;
 
         player.transform.position = loadPoint.position;
         player.transform.SetParent(loadPoint);
@@ -79,42 +80,29 @@ public class DELETELATERCanonscript : MonoBehaviour
     {
         isLoaded = false;
         isFlying = true;
-        playerInside = false;
 
         player.transform.SetParent(null);
 
-        controller.enabled = false;
-
-        playerRb.isKinematic = false;
-        playerRb.velocity = Vector3.zero;
-        playerRb.velocity = CalculateLaunchVelocity();
-
-        line.enabled = false;
-
-        StartCoroutine(CheckLanding());
-    }
-
-    IEnumerator CheckLanding()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        while (!IsGrounded())
-        {
-            yield return null;
-        }
-
-        playerRb.velocity = Vector3.zero;
-        playerRb.isKinematic = true;
-
         controller.enabled = true;
 
-        TogglePlayerControl(true);
-        isFlying = false;
+        currentVelocity = CalculateLaunchVelocity();
+
+        line.enabled = false;
     }
 
-    bool IsGrounded()
+    void HandleFlight()
     {
-        return Physics.Raycast(player.transform.position, Vector3.down, 1.2f);
+        currentVelocity.y += gravity * Time.deltaTime;
+
+        controller.Move(currentVelocity * Time.deltaTime);
+
+        if (controller.isGrounded && currentVelocity.y <= 0)
+        {
+            isFlying = false;
+            currentVelocity = Vector3.zero;
+
+            TogglePlayerControl(true);
+        }
     }
 
     Vector3 CalculateLaunchVelocity()
@@ -122,7 +110,6 @@ public class DELETELATERCanonscript : MonoBehaviour
         Vector3 start = loadPoint.position;
         Vector3 end = landingPoint.position;
 
-        float gravity = Physics.gravity.y;
         float time = 1.5f;
 
         Vector3 displacement = end - start;
@@ -147,7 +134,7 @@ public class DELETELATERCanonscript : MonoBehaviour
         for (int i = 0; i < resolution; i++)
         {
             float t = i * timeStep;
-            Vector3 point = start + velocity * t + 0.5f * Physics.gravity * t * t;
+            Vector3 point = start + velocity * t + 0.5f * Vector3.up * gravity * t * t;
             line.SetPosition(i, point);
         }
     }
@@ -162,13 +149,11 @@ public class DELETELATERCanonscript : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isLoaded && !isFlying)
         {
-            playerInside = true;
             player = other.gameObject;
-            playerRb = player.GetComponent<Rigidbody>();
-            playerMovement = player.GetComponent<PlayerMovement>(); 
             controller = player.GetComponent<CharacterController>();
+            playerMovement = player.GetComponent<PlayerMovement>();
 
-            LoadPlayer(); // ?? Auto load on enter
+            LoadPlayer();
         }
     }
 
@@ -176,11 +161,8 @@ public class DELETELATERCanonscript : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isLoaded)
         {
-            playerInside = false;
-
             if (interactUI != null)
                 interactUI.SetActive(false);
         }
     }
 }
-
