@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,21 +6,35 @@ using UnityEngine;
 public class PlatformCollision : MonoBehaviour
 {
     [SerializeField] string playerTag = "Player";
-    [SerializeField] Transform platform;
-    // Start is called before the first frame update
+    [SerializeField] MovingPlatform platform;
+
+    void Awake()
+    {
+        platform = GetComponentInParent<MovingPlatform>();
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag(playerTag))
+        if (other.CompareTag(playerTag))
         {
-            other.gameObject.transform.parent = platform;
+            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            if (player != null)
+            {
+                player.SetPlatform(platform);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag(playerTag))
+        if (other.CompareTag(playerTag))
         {
-            other.gameObject.transform.parent = null;
+            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            if (player != null)
+            {
+                player.SetPlatform(null);
+            }
         }
     }
 }
