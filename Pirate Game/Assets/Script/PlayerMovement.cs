@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 abilityDirection;
     private bool inMapScene;
     private bool canDoubleJump;
+    private MovingPlatform currentPlatform;
 
     void Awake()
     {
@@ -75,7 +76,12 @@ public class PlayerMovement : MonoBehaviour
         return SceneManager.GetActiveScene().name == "MapScene";
     }
 
-void Update()
+    public void SetPlatform(MovingPlatform platform)
+    {
+        currentPlatform = platform;
+    }
+
+    void Update()
     {
         //Normalize forward and right vectors to remove vertical direction and properly scale horizontal
         //use cam as a the direction reference for 3d platformer environment 
@@ -191,6 +197,15 @@ void Update()
             _velocity.y = 0;
         }
 
+        Vector3 platformMotion = Vector3.zero;
+
+        // Apply platform movement FIRST
+        if (currentPlatform != null)
+        {
+            controller.Move(currentPlatform.velocity * Time.deltaTime);
+        }
+
+        // Then apply player movement
         Vector3 motion = horizontal + new Vector3(0f, _velocity.y, 0f);
         controller.Move(motion * Time.deltaTime);
     }
