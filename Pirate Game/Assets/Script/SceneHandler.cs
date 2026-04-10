@@ -14,37 +14,39 @@ public class SceneHandler : MonoBehaviour
     }
 	public void HubWorld()
 	{
-        LoadScene(0);
+        LoadScene(1);
 	}
 
 	public void LevelOne()
 	{
-        LoadScene(1);
+        LoadScene(2);
 	}
 
 	public void LevelTwo()
 	{
-        LoadScene(2);
+        LoadScene(3);
 	}
 
 	public void LevelThree()
 	{
-        LoadScene(3);
+        LoadScene(4);
 	}
 
 	public void MapWorld()
 	{
-        LoadScene(4);
+        LoadScene(5);
 	}
 
 	public void Settings()
 	{
-		LoadScene(5);
+		LoadScene(6);
 	}
 
 	public void MainMenu()
 	{
-		LoadScene(6);
+		MouseUnlock();
+
+        LoadScene(0);
 	}
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
