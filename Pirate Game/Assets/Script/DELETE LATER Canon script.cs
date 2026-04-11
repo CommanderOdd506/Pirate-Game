@@ -33,7 +33,7 @@ public class DELETELATERCanonscript : MonoBehaviour
             interactUI.SetActive(false);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (isLoaded)
         {

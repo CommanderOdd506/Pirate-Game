@@ -7,46 +7,44 @@ public class SceneHandler : MonoBehaviour
 {
 	public TimeManager timeManager;
 
-	public void LoadScene(int index)
+	public void LoadScene(string name)
 	{
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadSceneAsync(index);
+        SceneManager.LoadSceneAsync(name);
     }
 	public void HubWorld()
 	{
-        LoadScene(1);
+        LoadScene("Hub World");
 	}
 
 	public void LevelOne()
 	{
-        LoadScene(2);
+        LoadScene("Level One");
 	}
 
 	public void LevelTwo()
 	{
-        LoadScene(3);
+        LoadScene("Level Two");
 	}
 
 	public void LevelThree()
 	{
-        LoadScene(4);
+        LoadScene("Level Three");
 	}
 
 	public void MapWorld()
 	{
-        LoadScene(5);
+        LoadScene("Map World");
 	}
 
 	public void Settings()
 	{
-		LoadScene(6);
+		LoadScene("Settings");
 	}
 
 	public void MainMenu()
 	{
-		MouseUnlock();
-
-        LoadScene(0);
+		LoadScene("Main Menu");
 	}
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -59,7 +57,7 @@ public class SceneHandler : MonoBehaviour
         }
 
 		//locks or unlocks cursor after load
-		if (scene.buildIndex == 5 || scene.buildIndex == 6) //settings + main menu
+		if (scene.name == "Settings" || scene.name == "Main Menu") //settings + main menu
 		{
 			MouseUnlock();
 		}
