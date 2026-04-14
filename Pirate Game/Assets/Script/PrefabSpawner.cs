@@ -8,6 +8,7 @@ public class PrefabSpawner : MonoBehaviour
     [SerializeField] private bool loopSpawn;
     
     [SerializeField] private float loopTime = 3.0f;
+    [SerializeField] private float startDelay = 0f;
 
 
     [Header ("Random")]
@@ -17,15 +18,32 @@ public class PrefabSpawner : MonoBehaviour
 
     private float loopTimer;
     private float randomTime;
+    private bool started = true;
     // Update is called once per frame
 
     void Start()
     {
         randomTime = GetRandomTime();
+        if(startDelay > 0)
+        {
+            started = false;
+            StartCoroutine(DelayTimer());
+        }
+        else
+        {
+            SpawnObject();
+        }
+    }
+
+    IEnumerator DelayTimer()
+    {
+        yield return new WaitForSeconds(startDelay);
+        SpawnObject();
+        started = true;
     }
     void Update()
     {
-        if (loopSpawn)
+        if (loopSpawn && started)
         {
             loopTimer += Time.deltaTime;
 

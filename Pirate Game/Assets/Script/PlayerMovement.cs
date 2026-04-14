@@ -34,6 +34,15 @@ public class PlayerMovement : MonoBehaviour
     public float rollDuration = 0.6f;
     public float rollCooldown = 1f;
 
+    //properties
+    public bool IsGrounded => isGrounded;
+    public bool IsSprinting => isSprinting;
+    public bool IsDashing => isDashing;
+    public bool IsRolling => isRolling;
+
+    public float VerticalVelocity => _velocity.y;
+    public float CurrentHorizontalSpeed => _currentSpeed;
+
     //runtime
     private PlayerInput input;
     private Vector3 _velocity;
