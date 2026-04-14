@@ -43,7 +43,12 @@ public class MovingPlatform : MonoBehaviour, IStasisable
 
     void FixedUpdate()
     {
-        if (isStasised) return;
+        if (isStasised)
+        {
+            velocity = Vector3.zero;
+            return;
+        }
+            
 
         Vector3 oldPosition = transform.position;
 
