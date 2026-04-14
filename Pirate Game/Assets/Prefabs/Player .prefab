@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 4030481981814075691}
   - component: {fileID: 1305996941446263384}
   - component: {fileID: 3654483049490268460}
+  - component: {fileID: 3386177179107378073}
   m_Layer: 0
   m_Name: 'Player '
   m_TagString: Player
@@ -924,6 +925,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3386177179107378073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706135104466363557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29bfad80f8f4d6944880ad8b3534741a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 4030481981814075691}
+  canInteract: 0
 --- !u!1 &5539728990694057386
 GameObject:
   m_ObjectHideFlags: 3
@@ -1332,7 +1347,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 289c0b03bdd902a47b15443e7fcf335a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2832369172866544464}
   m_SourcePrefab: {fileID: 100100000, guid: 289c0b03bdd902a47b15443e7fcf335a, type: 3}
 --- !u!4 &6990840837819681384 stripped
 Transform:
@@ -1340,3 +1359,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7390070325577526659}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7660521945996792018 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 289c0b03bdd902a47b15443e7fcf335a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7390070325577526659}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2832369172866544464
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7660521945996792018}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dc5e821a46d0bbe42addd51dd8c4e6b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

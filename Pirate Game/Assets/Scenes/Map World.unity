@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 74973696}
   - component: {fileID: 74973695}
   - component: {fileID: 74973694}
+  - component: {fileID: 74973698}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -240,6 +241,20 @@ Transform:
   - {fileID: 1921885944}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &74973698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74973693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29bfad80f8f4d6944880ad8b3534741a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 74973694}
+  canInteract: 0
 --- !u!1 &215425174
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +348,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215425174}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 354550f029889064589fc7a423c7d1e8, type: 3}
   m_Name: 
@@ -378,8 +393,8 @@ GameObject:
   - component: {fileID: 239530397}
   - component: {fileID: 239530398}
   m_Layer: 0
-  m_Name: Lvl3Collider
-  m_TagString: Untagged
+  m_Name: Level Three
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -513,7 +528,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273378359}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 354550f029889064589fc7a423c7d1e8, type: 3}
   m_Name: 
@@ -640,7 +655,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354154220}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 354550f029889064589fc7a423c7d1e8, type: 3}
   m_Name: 
@@ -788,8 +803,8 @@ GameObject:
   - component: {fileID: 726774582}
   - component: {fileID: 726774583}
   m_Layer: 0
-  m_Name: Lvl2Collider
-  m_TagString: Untagged
+  m_Name: Level Two
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -929,8 +944,8 @@ GameObject:
   - component: {fileID: 1048840610}
   - component: {fileID: 1048840611}
   m_Layer: 0
-  m_Name: Lvl1Collider
-  m_TagString: Untagged
+  m_Name: Level One
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
