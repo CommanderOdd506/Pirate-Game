@@ -187,15 +187,16 @@ public class PlayerMovement : MonoBehaviour
         //JUMP
 
         //timer check bools 
+        bool usingAbilities = isRolling || isDashing;
         bool canCoyoteJump = _timeSinceLeftGround <= coyoteTime;
         bool bufferedJump = _timeSinceJumpPressed <= jumpBuffer;
-        if (bufferedJump && (isGrounded || canCoyoteJump))
+        if (bufferedJump && (isGrounded || canCoyoteJump) && !usingAbilities)
         {
             _timeSinceJumpPressed = jumpBuffer + 1f;
             _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
             OnJump?.Invoke();
         }
-        else if(bufferedJump && canDoubleJump)
+        else if(bufferedJump && canDoubleJump && !usingAbilities)
         {
             canDoubleJump = false;
             _timeSinceJumpPressed = jumpBuffer + 1f;
