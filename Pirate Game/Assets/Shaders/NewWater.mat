@@ -127,7 +127,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _Water_Depth: 0.18
+    - _Water_Depth: 0.07
     - _WaveSpeed: 0.05
     - _Wave_Amplitude: 0.05
     - _Wave_Frequency: 1.68
@@ -137,7 +137,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Deep_Color: {r: 0.20198467, g: 0.44462374, b: 0.8396226, a: 0}
+    - _Deep_Color: {r: 0.20392154, g: 0.5861628, b: 0.8392157, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RippleColor: {r: 0.27830186, g: 0.809199, b: 1, a: 0}
     - _Shallow_Color: {r: 0.43961373, g: 0.6920495, b: 0.8396226, a: 0}
