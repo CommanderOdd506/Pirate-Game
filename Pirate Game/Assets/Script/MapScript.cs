@@ -2,47 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapScript : MonoBehaviour
+public class MapScript : MonoBehaviour, IInteract
 {
-    public PlayerInput playerInput;
     public SceneHandler sceneHandler;
 
     private bool inCollider = false;
-    private string objectName;
+    private string sceneName;
     void Start()
     {
-        objectName = gameObject.name;
+        sceneName = gameObject.name;
     }
 
     void Update ()
     {
-        if(inCollider && playerInput.interactPressed)
-        {   
-             Debug.Log(objectName);
-             switch (objectName)
-             {
-                 case "Map":
-                    sceneHandler.MapWorld();
-                    break;
+        //if(inCollider && playerInput.interactPressed)
+        //{   
 
-                 case "Level One":
-                    sceneHandler.LevelOne();
-                    break;
+             //sceneHandler.LoadScene(sceneName);
+             //Debug.Log("going");
+        //}
+    }
 
-                 case "Level Two":
-                    sceneHandler.LevelTwo();
-                    break;
-
-                 case "Level Three":
-                    sceneHandler.LevelThree();
-                    break;
-
-                 case "Hub":
-                    sceneHandler.HubWorld();
-                    break;
-             }
-
-        }
+    public void OnInteract()
+    {
+        sceneHandler.LoadScene(sceneName);
     }
 
     private void OnTriggerEnter(Collider other)

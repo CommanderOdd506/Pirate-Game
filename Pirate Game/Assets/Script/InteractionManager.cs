@@ -11,7 +11,8 @@ public class InteractionManager : MonoBehaviour
     public SceneManager sceneManager;
 
     public bool canInteract = false;
-    private string objectName;
+    private IInteract currentInteractable;
+
     void Start()
     {
         
@@ -22,37 +23,33 @@ public class InteractionManager : MonoBehaviour
     {
         if(canInteract & playerInput.interactPressed)
         {
-            Debug.Log(objectName);
+            //if currentinteractable is not null call the function
+            currentInteractable?.OnInteract();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Map"))
-        {
-            canInteract = true;
-            objectName = other.gameObject.name;
-        }
+        //finds interactable interface on script of gameobject whose collider you are entering
+        IInteract interactable = other.GetComponent<IInteract>();
 
-        else if(other.CompareTag("Level"))
-        {
-            canInteract = true;
-            objectName = other.gameObject.name;
-        }
 
-        else if(other.CompareTag("Collectible"))
+        if (interactable != null)
         {
+            //you can interact if it exists
             canInteract = true;
-            objectName = other.gameObject.name;
+            currentInteractable = interactable;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        IInteract interactable = other.GetComponent<IInteract>();
+
+        if (interactable != null && interactable == currentInteractable)
         {
             canInteract = false;
-            objectName = null;
+            currentInteractable = null;
         }
     }
 }
