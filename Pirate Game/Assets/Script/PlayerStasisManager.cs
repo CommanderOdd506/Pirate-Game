@@ -11,6 +11,9 @@ public class PlayerStasisManager : MonoBehaviour
 
     [SerializeField] private PlayerInput playerInput;
 
+    [SerializeField] private GameObject standardPost;
+    [SerializeField] private GameObject stasisPost;
+
     IStasisable bestTarget = null;
     IStasisable previousTarget = null;
 
@@ -19,6 +22,8 @@ public class PlayerStasisManager : MonoBehaviour
 
     IStasisable stasisedObject = null;
     Coroutine stasisCoroutine;
+
+    
 
     void Awake()
     {
@@ -32,6 +37,11 @@ public class PlayerStasisManager : MonoBehaviour
         if (playerInput.stasisSearchPressed)
         {
             FindStasisTarget();
+            SetPostProcessing(true);
+        }
+        else
+        {
+            SetPostProcessing(false);
         }
         if (playerInput.stasisActivatePressed && bestTarget != null)
         {
@@ -46,6 +56,21 @@ public class PlayerStasisManager : MonoBehaviour
         }
         //use find stasis target if input 
         //then use otheer input to activate stasis 
+    }
+
+    void SetPostProcessing(bool spp)
+    {
+        if (spp && !stasisPost.activeSelf)
+        {
+            standardPost.SetActive(false);
+            stasisPost.SetActive(true);
+        }
+        else if (!spp && !standardPost.activeSelf)
+        {
+            standardPost.SetActive(true);
+            stasisPost.SetActive(false);
+        }
+        return;
     }
 
     void FindStasisTarget()

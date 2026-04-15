@@ -26,12 +26,14 @@ public class SFXManager : MonoBehaviour
 
     public void Update()
     {
+        /*/*
         if(playerMovement.IsMoving && playerMovement.IsGrounded)
             AudioPlay("Walk");
 
+        
         else if(!playerMovement.IsMoving || !playerMovement.IsGrounded || playerMovement.IsSprinting)
             AudioStop("Walk");
-
+        */
 
 
         //if(playerMovement.IsSprinting)
@@ -39,16 +41,16 @@ public class SFXManager : MonoBehaviour
 
 
         //else if(!playerMovement.IsSprinting)
-            //AudioStop("Run");
+        //AudioStop("Run");
 
 
         //if(playerMovement.IsDashing && playerMovement.IsGrounded && playerMovement.dashPressed);
         //{
-            //AudioPlay("Dash");
+        //AudioPlay("Dash");
         //}
 
 
-        if(playerMovement.IsRolling)
+        if (playerMovement.IsRolling)
         {
             AudioPlay("Roll");
             AudioStop("Walk");
