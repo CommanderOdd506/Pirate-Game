@@ -47,14 +47,44 @@ MonoBehaviour:
   playerMovement: {fileID: 0}
   sounds:
   - name: Walk
-    clip: {fileID: 8300000, guid: c61aa092968d5c44e81204436ad90d77, type: 3}
+    clip: {fileID: 8300000, guid: bf20bcb2c2538484f9a7ed9277fbb42f, type: 3}
     volume: 1
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Run
-    clip: {fileID: 8300000, guid: c61aa092968d5c44e81204436ad90d77, type: 3}
+    clip: {fileID: 8300000, guid: bf20bcb2c2538484f9a7ed9277fbb42f, type: 3}
     volume: 1
     pitch: 1.25
     loop: 1
+    source: {fileID: 0}
+  - name: CannonFire
+    clip: {fileID: 8300000, guid: 75c2c00b9c161ae4e8c0fe1e53b7fad7, type: 3}
+    volume: 1.23
+    pitch: 1.25
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 1e56f3439ed4be445894aacab63552f8, type: 3}
+    volume: 0.99
+    pitch: 1.25
+    loop: 0
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 76726db4fc47eb948a12917c5da6c3a9, type: 3}
+    volume: 0.99
+    pitch: 1.25
+    loop: 0
+    source: {fileID: 0}
+  - name: Roll
+    clip: {fileID: 8300000, guid: 428b69047dbc7114dae8952077633555, type: 3}
+    volume: 0.4
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+  - name: CoinPickup
+    clip: {fileID: 8300000, guid: 227e5031a21ffb44298f982be83f26b7, type: 3}
+    volume: 1
+    pitch: 1.1
+    loop: 0
     source: {fileID: 0}

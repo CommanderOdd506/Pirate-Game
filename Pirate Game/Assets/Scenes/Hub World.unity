@@ -1548,6 +1548,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 871785511094678181, guid: e72f32fbfeb9ec244b37efec7ee6805b,
         type: 3}
+      propertyPath: collectible
+      value: 
+      objectReference: {fileID: 721677901}
+    - target: {fileID: 871785511094678181, guid: e72f32fbfeb9ec244b37efec7ee6805b,
+        type: 3}
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 637871707}
@@ -4205,6 +4210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ea2453236d0624fba4774056701203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasCollected: 0
 --- !u!4 &721677902
 Transform:
   m_ObjectHideFlags: 0

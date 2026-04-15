@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
     //properties
     public bool isMoving = false;
+    public bool jumpPressed;
+    public bool dashPressed;
     public bool IsGrounded => isGrounded;
     public bool IsSprinting => isSprinting;
     public bool IsDashing => isDashing;
@@ -117,7 +119,8 @@ public class PlayerMovement : MonoBehaviour
             isMoving = false;
 
         bool sprintHeld = input.sprintHeld;
-        bool jumpPressed = input.jumpPressed;
+        jumpPressed = input.jumpPressed;
+        dashPressed = input.dashPressed;
 
         //timers 
 
@@ -198,6 +201,7 @@ public class PlayerMovement : MonoBehaviour
             _timeSinceJumpPressed = jumpBuffer + 1f;
             _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
         }
+        
 
         if (isGrounded && _velocity.y < 0f) _velocity.y = groundStickForce;
         else _velocity.y += gravity * Time.deltaTime;
