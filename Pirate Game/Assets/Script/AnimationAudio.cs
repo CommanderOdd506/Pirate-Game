@@ -13,6 +13,10 @@ public class AnimationAudio : MonoBehaviour
     // Update is called once per frame
     public void PlayFootstepAudio()
     {
-        SFXManager.instance.AudioPlay("Walk");
+        if (SFXManager.instance)
+        {
+            SFXManager.instance.AudioPlay("Walk");
+        }
+
     }
 }
