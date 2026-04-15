@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // ROLL
-        if (input.rollPressed && rollCooldownTimer <= 0f && !isRolling && !isDashing)
+        if (input.rollPressed && rollCooldownTimer <= 0f && !isRolling && !isDashing && isGrounded)
         {
             StartRoll(moveDir);
         }

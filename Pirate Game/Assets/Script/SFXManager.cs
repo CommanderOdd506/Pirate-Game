@@ -38,8 +38,8 @@ public class SFXManager : MonoBehaviour
             AudioPlay("Dash");
 
 
-        else if(!playerMovement.IsSprinting)
-            AudioStop("Run");
+        //else if(!playerMovement.IsSprinting)
+            //AudioStop("Run");
 
 
         //if(playerMovement.IsDashing && playerMovement.IsGrounded && playerMovement.dashPressed);
@@ -113,6 +113,16 @@ public class SFXManager : MonoBehaviour
         {
             t.source.Play();
         }
+    }
+
+    public void AudioPlayOneShot(string name)
+    {
+        SoundLibrary t = GetSound(name);
+
+        if (t == null)
+            return;
+
+        t.source.PlayOneShot(t.clip);
     }
 
     public void AudioStop(string name)
