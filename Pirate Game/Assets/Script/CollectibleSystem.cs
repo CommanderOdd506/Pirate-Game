@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollectibleSystem : MonoBehaviour
 {
     public static CollectibleSystem Instance;
+    public bool hasCollected = false;
     private Dictionary<string, int> collectibles = new();
     // Start is called before the first frame update
     void Awake()
@@ -19,6 +20,11 @@ public class CollectibleSystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void Update()
+    {
+        hasCollected = false;
+    }
+
     public void Add(string id, int amount)
     {
         if (!collectibles.ContainsKey(id))
@@ -28,6 +34,7 @@ public class CollectibleSystem : MonoBehaviour
         collectibles[id] += amount;
         int gold = Get("gold");
         Debug.Log("Gold Amount " + gold);
+        hasCollected = true;
     }
 
     public int Get(string id)
