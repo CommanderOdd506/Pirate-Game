@@ -8,8 +8,6 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
-    
-
     public Transform camera;
 
     public bool canSprint = false;
@@ -38,9 +36,6 @@ public class PlayerMovement : MonoBehaviour
     public float rollCooldown = 1f;
 
     //properties
-    public bool isMoving = false;
-    public bool jumpPressed;
-    public bool dashPressed;
     public bool IsGrounded => isGrounded;
     public bool IsSprinting => isSprinting;
     public bool IsDashing => isDashing;
@@ -120,16 +115,8 @@ public class PlayerMovement : MonoBehaviour
         //Collect Input
         isGrounded = controller.isGrounded;
         Vector2 move = input.move;
-
-        if(move.sqrMagnitude != 0)
-            isMoving = true;
-
-        else
-            isMoving = false;
-
         bool sprintHeld = input.sprintHeld;
-        jumpPressed = input.jumpPressed;
-        dashPressed = input.dashPressed;
+        bool jumpPressed = input.jumpPressed;
 
         //timers 
 
@@ -160,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // ROLL
-        if (input.rollPressed && rollCooldownTimer <= 0f && !isRolling && !isDashing && isGrounded)
+        if (input.rollPressed && rollCooldownTimer <= 0f && !isRolling && !isDashing)
         {
             StartRoll(moveDir);
         }
@@ -216,7 +203,6 @@ public class PlayerMovement : MonoBehaviour
             _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
             OnJump?.Invoke();
         }
-        
 
         if (isGrounded && _velocity.y < 0f) _velocity.y = groundStickForce;
         else _velocity.y += gravity * Time.deltaTime;

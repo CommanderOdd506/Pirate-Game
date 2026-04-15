@@ -4,8 +4,6 @@ using TMPro;
 
 public class DELETELATERCanonscript : MonoBehaviour
 {
-    public SFXManager sfxManager;
-
     public Transform loadPoint;
     public Transform landingPoint;
     public float launchHeight = 5f;
@@ -40,7 +38,6 @@ public class DELETELATERCanonscript : MonoBehaviour
         if (isLoaded)
         {
             DrawArc();
-            StopMoveAudio();
 
             if (interactUI != null)
             {
@@ -51,7 +48,6 @@ public class DELETELATERCanonscript : MonoBehaviour
             if (Input.GetKeyDown(shootKey))
             {
                 ShootPlayer();
-                CannonBallAudio();
             }
         }
         else
@@ -63,19 +59,7 @@ public class DELETELATERCanonscript : MonoBehaviour
         if (isFlying)
         {
             HandleFlight();
-            StopMoveAudio();
         }
-    }
-
-    void StopMoveAudio()
-    {
-        sfxManager.AudioStop("Walk");
-        sfxManager.AudioStop("Run");
-    }
-
-    void CannonBallAudio()
-    {
-        sfxManager.AudioPlay("CannonFire");
     }
 
     void LoadPlayer()

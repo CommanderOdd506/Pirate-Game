@@ -26,16 +26,16 @@ public class SFXManager : MonoBehaviour
 
     public void Update()
     {
-        if(playerMovement.isMoving && playerMovement.IsGrounded)
+        if(playerMovement.IsMoving && playerMovement.IsGrounded)
             AudioPlay("Walk");
 
-        else if(!playerMovement.isMoving || !playerMovement.IsGrounded || playerMovement.IsSprinting)
+        else if(!playerMovement.IsMoving || !playerMovement.IsGrounded || playerMovement.IsSprinting)
             AudioStop("Walk");
 
 
 
-        if(playerMovement.IsSprinting)
-            AudioPlay("Dash");
+        //if(playerMovement.IsSprinting)
+        //    AudioPlay("Dash");
 
 
         //else if(!playerMovement.IsSprinting)
@@ -55,7 +55,7 @@ public class SFXManager : MonoBehaviour
             AudioStop("Run");
         }
 
-
+        /*
         if(playerMovement.jumpPressed)
         {
             if(jumpCount < 2)
@@ -64,17 +64,19 @@ public class SFXManager : MonoBehaviour
                 jumpCount++;
             }
         }
+        */
 
-        if(playerMovement.IsGrounded)
+        if (playerMovement.IsGrounded)
         {
             jumpCount = 0;
         }
 
+        /*
         if(collectible.hasCollected)
         {
             AudioPlay("CoinPickup");
         }
-        
+        */
     }
 
     void Init()
