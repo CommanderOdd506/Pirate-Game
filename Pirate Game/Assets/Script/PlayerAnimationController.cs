@@ -7,28 +7,38 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Awake()
     {
-        movement = GetComponent<PlayerMovement>();
+        movement = GetComponentInParent<PlayerMovement>();
     }
 
     void Update()
     {
         UpdateAnimator();
     }
+    private void OnEnable()
+    {
+        PlayerMovement.OnJump += HandleJumpAnimation;
+    }
+
+    private void OnDisable()
+    {
+        PlayerMovement.OnJump -= HandleJumpAnimation;
+    }
+
+    void HandleJumpAnimation()
+    {
+        animator.SetTrigger("Jump");
+    }
 
     void UpdateAnimator()
     {
         // Movement blend
-        animator.SetFloat("Speed", movement.CurrentHorizontalSpeed);
+        animator.SetBool("IsWalking", movement.IsMoving);
 
         // Ground / air
         animator.SetBool("IsGrounded", movement.IsGrounded);
-
-        // States
-        animator.SetBool("IsSprinting", movement.IsSprinting);
-        animator.SetBool("IsDashing", movement.IsDashing);
         animator.SetBool("IsRolling", movement.IsRolling);
-
+        animator.SetBool("IsDashing", movement.IsDashing);
         // Vertical velocity for jump/fall blend tree
-        animator.SetFloat("VerticalVelocity", movement.VerticalVelocity);
+        //animator.SetFloat("VerticalVelocity", movement.VerticalVelocity);
     }
 }
