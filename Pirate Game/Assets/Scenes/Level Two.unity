@@ -3455,12 +3455,12 @@ PrefabInstance:
     - target: {fileID: 117700657808422677, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9977665
+      value: 0.99776644
       objectReference: {fileID: 0}
     - target: {fileID: 117700657808422677, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.06679903
+      value: 0.06679906
       objectReference: {fileID: 0}
     - target: {fileID: 117700657808422677, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
@@ -3480,17 +3480,17 @@ PrefabInstance:
     - target: {fileID: 661099679385787082, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.048639167
+      value: 0.04863915
       objectReference: {fileID: 0}
     - target: {fileID: 661099679385787082, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000002532524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 661099679385787082, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000012332589
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1985339135478975953, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
@@ -3501,6 +3501,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FollowOffset.z
       value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654483049490268460, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 21fd0aa208981194b9ed8bbfd8396e4a,
+        type: 2}
+    - target: {fileID: 3654483049490268460, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_SlopeLimit
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3794273233408147053, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
@@ -3625,17 +3636,17 @@ PrefabInstance:
     - target: {fileID: 7700628494285285222, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.030511148
+      value: 0.03051116
       objectReference: {fileID: 0}
     - target: {fileID: 7700628494285285222, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000174217
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7700628494285285222, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 5.3180355e-10
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9353,13 +9364,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d5b91d1adc49e4383fa712d905c132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxManager: {fileID: 0}
   loadPoint: {fileID: 277893588}
   landingPoint: {fileID: 769342732}
   launchHeight: 5
   shootKey: 32
   interactUI: {fileID: 0}
   interactText: {fileID: 0}
+  playerModel: {fileID: 0}
 --- !u!136 &1924891379
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10215,7 +10226,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 8ceac51bd1c4cd14884c2425109f0b78, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
