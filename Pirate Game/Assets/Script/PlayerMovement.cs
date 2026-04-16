@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canDoubleJump;
     private bool canDash;
     private MovingPlatform currentPlatform;
+    private bool hasDashed;
 
     void Awake()
     {
@@ -133,6 +134,11 @@ public class PlayerMovement : MonoBehaviour
             canDoubleJump = true;
         }
 
+        if(isGrounded && hasDashed)
+        {
+            hasDashed = false;
+        }
+
         //horizontal move
 
         Vector3 moveDir = camForward * move.y + camRight * move.x;
@@ -140,10 +146,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 horizontal = new Vector3();
 
         // DASH
-        if (input.dashPressed && dashCooldownTimer <= 0f && !isDashing && !isRolling && !isGrounded)
+        if (input.dashPressed && dashCooldownTimer <= 0f && !isDashing && !isRolling && !isGrounded && !hasDashed)
         {
             StartDash(moveDir);
-
+            hasDashed = true;
         }
 
         // ROLL
