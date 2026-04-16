@@ -24,6 +24,8 @@ public class DELETELATERCanonscript : MonoBehaviour
     private Vector3 currentVelocity;
     private float gravity = -9.81f;
 
+    public GameObject playerModel; 
+
     private void Start()
     {
         line = GetComponent<LineRenderer>();
@@ -33,7 +35,7 @@ public class DELETELATERCanonscript : MonoBehaviour
             interactUI.SetActive(false);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (isLoaded)
         {
@@ -64,6 +66,10 @@ public class DELETELATERCanonscript : MonoBehaviour
 
     void LoadPlayer()
     {
+
+        playerModel.SetActive(false);
+        
+       
         isLoaded = true;
 
         controller.enabled = false;
@@ -74,10 +80,15 @@ public class DELETELATERCanonscript : MonoBehaviour
         TogglePlayerControl(false);
 
         line.enabled = true;
+
+        
     }
 
     void ShootPlayer()
     {
+
+        playerModel.SetActive(true);
+
         isLoaded = false;
         isFlying = true;
 
