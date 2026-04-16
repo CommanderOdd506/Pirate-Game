@@ -10,6 +10,16 @@ public class AnimationAudio : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        PlayerMovement.OnJump += PlayJumpAudio;
+    }
+
+    private void OnDisable()
+    {
+        PlayerMovement.OnJump -= PlayJumpAudio;
+    }
+
     // Update is called once per frame
     public void PlayFootstepAudio()
     {
@@ -18,5 +28,29 @@ public class AnimationAudio : MonoBehaviour
             SFXManager.instance.AudioPlay("Walk");
         }
 
+    }
+
+    public void PlayDashAudio()
+    {
+        if (SFXManager.instance)
+        {
+            SFXManager.instance.AudioPlay("Dash");
+        }
+    }
+
+    public void PlayJumpAudio()
+    {
+        if (SFXManager.instance)
+        {
+            SFXManager.instance.AudioPlay("Jump");
+        }
+    }
+
+    public void PlayRollAudio()
+    {
+        if (SFXManager.instance)
+        {
+            SFXManager.instance.AudioPlay("Roll");
+        }
     }
 }

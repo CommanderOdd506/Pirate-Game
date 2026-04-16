@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SFXManager : MonoBehaviour
 {
-    public PlayerMovement playerMovement;
-    public CollectibleSystem collectible;
+    //public PlayerMovement playerMovement;
+    //public CollectibleSystem collectible;
     public SoundLibrary[] sounds;
 
-    private int jumpCount = 0;
+    //private int jumpCount = 0;
     
     public static SFXManager instance;
 
@@ -21,33 +21,34 @@ public class SFXManager : MonoBehaviour
         else
             Destroy(gameObject);
 
+        DontDestroyOnLoad(this.gameObject);
         Init();
     }
 
     public void Update()
     {
-        /*/*
+        /*
         if(playerMovement.IsMoving && playerMovement.IsGrounded)
             AudioPlay("Walk");
 
         
         else if(!playerMovement.IsMoving || !playerMovement.IsGrounded || playerMovement.IsSprinting)
             AudioStop("Walk");
-        */
+        
 
 
-        //if(playerMovement.IsSprinting)
-        //    AudioPlay("Dash");
+        if(playerMovement.IsSprinting)
+            AudioPlay("Dash");
 
 
-        //else if(!playerMovement.IsSprinting)
-        //AudioStop("Run");
+        else if(!playerMovement.IsSprinting)
+        AudioStop("Run");
 
 
-        //if(playerMovement.IsDashing && playerMovement.IsGrounded && playerMovement.dashPressed);
-        //{
-        //AudioPlay("Dash");
-        //}
+        if(playerMovement.IsDashing && playerMovement.IsGrounded && playerMovement.dashPressed);
+        {
+        AudioPlay("Dash");
+        }
 
 
         if (playerMovement.IsRolling)
@@ -57,7 +58,6 @@ public class SFXManager : MonoBehaviour
             AudioStop("Run");
         }
 
-        /*
         if(playerMovement.jumpPressed)
         {
             if(jumpCount < 2)
@@ -66,14 +66,14 @@ public class SFXManager : MonoBehaviour
                 jumpCount++;
             }
         }
-        */
+        s
 
         if (playerMovement.IsGrounded)
         {
             jumpCount = 0;
         }
 
-        /*
+        
         if(collectible.hasCollected)
         {
             AudioPlay("CoinPickup");
@@ -92,10 +92,6 @@ public class SFXManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
 
-            for(int i=0;i<sounds.Length;i++)
-            {
-
-            }
         }
     }
 
@@ -125,7 +121,7 @@ public class SFXManager : MonoBehaviour
 
         if (t == null)
             return;
-
+        t.source.Stop();
         t.source.PlayOneShot(t.clip);
     }
 

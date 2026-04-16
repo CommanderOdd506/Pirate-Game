@@ -44,19 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755669a7a9743834193a830f60cf0f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
   sounds:
   - name: Walk
-    clip: {fileID: 8300000, guid: bf20bcb2c2538484f9a7ed9277fbb42f, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 1
+    clip: {fileID: 8300000, guid: 906ef501e8c5b174d935a72c7c648842, type: 3}
+    volume: 0.659
+    pitch: 0.89
+    loop: 0
     source: {fileID: 0}
   - name: Run
-    clip: {fileID: 8300000, guid: bf20bcb2c2538484f9a7ed9277fbb42f, type: 3}
-    volume: 1
-    pitch: 1.25
-    loop: 1
+    clip: {fileID: 8300000, guid: 906ef501e8c5b174d935a72c7c648842, type: 3}
+    volume: 0.603
+    pitch: 0.85
+    loop: 0
     source: {fileID: 0}
   - name: CannonFire
     clip: {fileID: 8300000, guid: 75c2c00b9c161ae4e8c0fe1e53b7fad7, type: 3}
