@@ -14,6 +14,10 @@ public class PlayerInput : MonoBehaviour
     public bool dashPressed;
     public bool rollPressed;
 
+    [Header("Stasis")]
+    public bool stasisActivatePressed;
+    public bool stasisSearchPressed;
+
     [Header("Mouse")]
     public bool firePressed;
     public bool aimPressed;
@@ -48,7 +52,7 @@ public class PlayerInput : MonoBehaviour
         
 
         //disabling inputs based on scene, if it is any scene other than 4 (map scene) you are 3d and can use all abilities
-        if(currentScene.buildIndex != 4)
+        if(currentScene.buildIndex != 5)
         {
             sprintHeld = Input.GetKey(KeyCode.LeftShift);
             interactPressed = Input.GetKeyDown(KeyCode.F);
@@ -59,6 +63,8 @@ public class PlayerInput : MonoBehaviour
             aimPressed = Input.GetMouseButton(1);
             dashPressed = Input.GetKeyDown(KeyCode.LeftShift);
             rollPressed = Input.GetKeyDown(KeyCode.LeftControl);
+            stasisActivatePressed = Input.GetMouseButton(0);
+            stasisSearchPressed = Input.GetMouseButton(1);
 
             move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (move.sqrMagnitude > 1f) move.Normalize();

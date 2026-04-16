@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -34,6 +35,22 @@ public class PlayerMovement : MonoBehaviour
     public float rollDuration = 0.6f;
     public float rollCooldown = 1f;
 
+    //properties
+    public bool IsGrounded => isGrounded;
+    public bool IsSprinting => isSprinting;
+    public bool IsDashing => isDashing;
+    public bool IsRolling => isRolling;
+
+    public float VerticalVelocity => _velocity.y;
+    public bool HasMovementInput => input.move.sqrMagnitude > 0.01f;
+    public bool IsMoving => HasMovementInput && isGrounded && !isDashing && !isRolling;
+    public float CurrentHorizontalSpeed => _currentSpeed;
+
+    //Events
+    public static Action OnJump;
+    public static Action OnDash;
+    public static Action OnRoll;
+
     //runtime
     private PlayerInput input;
     private Vector3 _velocity;
@@ -50,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
     private float rollCooldownTimer;
     private Vector3 abilityDirection;
     private bool inMapScene;
+    private bool canDoubleJump;
+    private bool canDash;
+    private MovingPlatform currentPlatform;
+    private bool hasDashed;
 
     void Awake()
     {
@@ -74,7 +95,12 @@ public class PlayerMovement : MonoBehaviour
         return SceneManager.GetActiveScene().name == "MapScene";
     }
 
-void Update()
+    public void SetPlatform(MovingPlatform platform)
+    {
+        currentPlatform = platform;
+    }
+
+    void Update()
     {
         //Normalize forward and right vectors to remove vertical direction and properly scale horizontal
         //use cam as a the direction reference for 3d platformer environment 
@@ -103,7 +129,15 @@ void Update()
         dashCooldownTimer -= Time.deltaTime;
         rollCooldownTimer -= Time.deltaTime;
 
-       
+       if(isGrounded && !canDoubleJump)
+        {
+            canDoubleJump = true;
+        }
+
+        if(isGrounded && hasDashed)
+        {
+            hasDashed = false;
+        }
 
         //horizontal move
 
@@ -112,9 +146,10 @@ void Update()
         Vector3 horizontal = new Vector3();
 
         // DASH
-        if (input.dashPressed && dashCooldownTimer <= 0f && !isDashing && !isRolling)
+        if (input.dashPressed && dashCooldownTimer <= 0f && !isDashing && !isRolling && !isGrounded && !hasDashed)
         {
             StartDash(moveDir);
+            hasDashed = true;
         }
 
         // ROLL
@@ -155,20 +190,31 @@ void Update()
         _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, 10 * Time.deltaTime);
 
        
+        //JUMP
+
         //timer check bools 
+        bool usingAbilities = isRolling || isDashing;
         bool canCoyoteJump = _timeSinceLeftGround <= coyoteTime;
         bool bufferedJump = _timeSinceJumpPressed <= jumpBuffer;
-        if (bufferedJump && (isGrounded || canCoyoteJump))
+        if (bufferedJump && (isGrounded || canCoyoteJump) && !usingAbilities)
         {
             _timeSinceJumpPressed = jumpBuffer + 1f;
             _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
+            OnJump?.Invoke();
+        }
+        else if(bufferedJump && canDoubleJump && !usingAbilities)
+        {
+            canDoubleJump = false;
+            _timeSinceJumpPressed = jumpBuffer + 1f;
+            _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
+            OnJump?.Invoke();
         }
 
         if (isGrounded && _velocity.y < 0f) _velocity.y = groundStickForce;
         else _velocity.y += gravity * Time.deltaTime;
 
         //rotate towards move direction
-        if (moveDir.sqrMagnitude > 0.01f && !isDashing)
+        if (moveDir.sqrMagnitude > 0.01f && !isDashing && !isRolling)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -181,9 +227,19 @@ void Update()
             _velocity.y = 0;
         }
 
+        Vector3 platformMotion = Vector3.zero;
+
+        // Apply platform movement FIRST
+        if (currentPlatform != null)
+        {
+            controller.Move(currentPlatform.velocity * Time.deltaTime);
+        }
+
+        // Then apply player movement
         Vector3 motion = horizontal + new Vector3(0f, _velocity.y, 0f);
         controller.Move(motion * Time.deltaTime);
     }
+
 
 
     //ABILITIES
@@ -191,6 +247,7 @@ void Update()
 
     void StartDash(Vector3 moveDir)
     {
+        OnDash?.Invoke();
         isDashing = true;
         dashTimer = dashDuration;
         dashCooldownTimer = dashCooldown;
@@ -200,6 +257,8 @@ void Update()
 
     void StartRoll(Vector3 moveDir)
     {
+        Debug.Log("Roll");
+        OnRoll?.Invoke();
         isRolling = true;
         rollTimer = rollDuration;
         rollCooldownTimer = rollCooldown;

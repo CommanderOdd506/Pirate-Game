@@ -1,117 +1,127 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DELETELATERCanonscript : MonoBehaviour
 {
     public Transform loadPoint;
     public Transform landingPoint;
     public float launchHeight = 5f;
-    public KeyCode interactKey = KeyCode.E;
     public KeyCode shootKey = KeyCode.Space;
-   
+
+    public GameObject interactUI;
+    public TextMeshProUGUI interactText;
+
     private GameObject player;
-    private Rigidbody playerRb;
+    private CharacterController controller;
     private MonoBehaviour playerMovement;
-    
-    private bool playerInside = false;
+
     private bool isLoaded = false;
     private bool isFlying = false;
 
     private LineRenderer line;
 
-    CharacterController controller;
+    private Vector3 currentVelocity;
+    private float gravity = -9.81f;
+
+    public GameObject playerModel; 
 
     private void Start()
     {
         line = GetComponent<LineRenderer>();
         line.enabled = true;
+
+        if (interactUI != null)
+            interactUI.SetActive(false);
     }
+
     private void Update()
     {
-        if (playerInside && !isLoaded && Input.GetKeyDown(interactKey))
-        {
-            LoadPlayer();
-        }
         if (isLoaded)
         {
             DrawArc();
 
-            if (isLoaded && Input.GetKeyDown(shootKey))
+            if (interactUI != null)
+            {
+                interactUI.SetActive(true);
+                interactText.text = "Press " + shootKey + " to shoot";
+            }
+
+            if (Input.GetKeyDown(shootKey))
             {
                 ShootPlayer();
             }
         }
+        else
+        {
+            if (interactUI != null)
+                interactUI.SetActive(false);
+        }
+
+        if (isFlying)
+        {
+            HandleFlight();
+        }
     }
+
     void LoadPlayer()
     {
+
+        playerModel.SetActive(false);
+        
+       
         isLoaded = true;
 
         controller.enabled = false;
-
-        playerRb.velocity = Vector3.zero;
-
-        playerRb.isKinematic = true;
 
         player.transform.position = loadPoint.position;
         player.transform.SetParent(loadPoint);
 
         TogglePlayerControl(false);
 
-        line.enabled=true;
+        line.enabled = true;
+
+        
     }
+
     void ShootPlayer()
     {
+
+        playerModel.SetActive(true);
+
         isLoaded = false;
         isFlying = true;
 
-        playerInside = false;
-
         player.transform.SetParent(null);
-
-        controller.enabled = false;
-
-        playerRb.isKinematic =false;
-        playerRb.velocity = Vector3.zero;
-        
-        
-        playerRb.velocity = CalculateLaunchVelocity();
-
-
-        line.enabled = false;
-
-        StartCoroutine(CheckLanding());
-    }
-    IEnumerator CheckLanding()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        while (!IsGrounded())
-        {
-            yield return null;
-        }
-
-        playerRb.velocity = Vector3.zero;
-        playerRb.isKinematic = true;
 
         controller.enabled = true;
 
-        TogglePlayerControl(true); 
-        isFlying=false;
-        
+        currentVelocity = CalculateLaunchVelocity();
+
+        line.enabled = false;
     }
-    bool IsGrounded()
+
+    void HandleFlight()
     {
-        return Physics.Raycast(player.transform.position, Vector3.down, 1.2f);
+        currentVelocity.y += gravity * Time.deltaTime;
+
+        controller.Move(currentVelocity * Time.deltaTime);
+
+        if (controller.isGrounded && currentVelocity.y <= 0)
+        {
+            isFlying = false;
+            currentVelocity = Vector3.zero;
+
+            TogglePlayerControl(true);
+        }
     }
+
     Vector3 CalculateLaunchVelocity()
     {
         Vector3 start = loadPoint.position;
         Vector3 end = landingPoint.position;
 
-        float gravity = Physics.gravity.y;
-
-        float time = 1.5f; 
+        float time = 1.5f;
 
         Vector3 displacement = end - start;
 
@@ -120,6 +130,7 @@ public class DELETELATERCanonscript : MonoBehaviour
 
         return velocityXZ + Vector3.up * velocityY;
     }
+
     void DrawArc()
     {
         Vector3 velocity = CalculateLaunchVelocity();
@@ -131,37 +142,38 @@ public class DELETELATERCanonscript : MonoBehaviour
 
         line.positionCount = resolution;
 
-        for(int i = 0; i < resolution; i++)
+        for (int i = 0; i < resolution; i++)
         {
             float t = i * timeStep;
-            Vector3 point = start + velocity * t + 0.5f * Physics.gravity * t * t;
+            Vector3 point = start + velocity * t + 0.5f * Vector3.up * gravity * t * t;
             line.SetPosition(i, point);
         }
     }
-    void TogglePlayerControl( bool enabled )
+
+    void TogglePlayerControl(bool enabled)
     {
-        MonoBehaviour PlayerMovement = player.GetComponent<MonoBehaviour>();
-        if ( PlayerMovement != null )
-            PlayerMovement.enabled = enabled;
+        if (playerMovement != null)
+            playerMovement.enabled = enabled;
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isLoaded && !isFlying)
         {
-            playerInside = true;
             player = other.gameObject;
-            playerRb = player.GetComponent<Rigidbody>();
+            controller = player.GetComponent<CharacterController>();
+            playerMovement = player.GetComponent<PlayerMovement>();
 
-            playerMovement = player.GetComponent<MonoBehaviour>();
-
-            controller = player.GetComponent<CharacterController>();    
+            LoadPlayer();
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
-       if (other.CompareTag("Player") && !isLoaded)
+        if (other.CompareTag("Player") && !isLoaded)
         {
-            playerInside = false;
+            if (interactUI != null)
+                interactUI.SetActive(false);
         }
     }
 }

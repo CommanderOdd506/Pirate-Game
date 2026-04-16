@@ -5,105 +5,78 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-	public PlayerInput playerInput;
-	private bool isPaused = false;
-	public GameObject returnButton;
+	public TimeManager timeManager;
 
-	private void Start()
+	public void LoadScene(string name)
 	{
-		returnButton.SetActive(false);
-	}
-
-	private void Update()
-	{
-		if(playerInput.pausePressed)
-		{
-			if(isPaused)
-				Resume();
-
-			else
-				Pause();
-		}
-	}
-
-	private void Pause()
-	{
-		Time.timeScale = 0f;
-		isPaused = true;
-
-		returnButton.SetActive(true);
-
-		Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-	}
-
-	private void Resume()
-	{
-		Time.timeScale = 1;
-		isPaused = false;
-
-		returnButton.SetActive(false);
-
-		Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-	}
-
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadSceneAsync(name);
+    }
 	public void HubWorld()
 	{
-		SceneManager.LoadSceneAsync(0);
-
-		Resume();
+        LoadScene("Hub World");
 	}
 
 	public void LevelOne()
 	{
-		SceneManager.LoadSceneAsync(1);
-
-		Resume();
+        LoadScene("Level One");
 	}
 
 	public void LevelTwo()
 	{
-		SceneManager.LoadSceneAsync(2);
-
-		Resume();
-
-		Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        LoadScene("Level Two");
 	}
 
 	public void LevelThree()
 	{
-		SceneManager.LoadSceneAsync(3);
-
-		Resume();
+        LoadScene("Level Three");
 	}
 
 	public void MapWorld()
 	{
-		SceneManager.LoadSceneAsync(4);
-
-		Resume();
+        LoadScene("Map World");
 	}
 
 	public void Settings()
 	{
-		SceneManager.LoadSceneAsync(5);
-
-		Resume();
-
-		Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+		LoadScene("Settings");
 	}
 
 	public void MainMenu()
 	{
-		SceneManager.LoadSceneAsync(6);
+		LoadScene("Main Menu");
+	}
 
-		Resume();
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        timeManager = FindObjectOfType<TimeManager>();
+        if (timeManager != null)
+        {
+            timeManager.Resume();
+        }
 
+		//locks or unlocks cursor after load
+		if (scene.name == "Settings" || scene.name == "Main Menu") //settings + main menu
+		{
+			MouseUnlock();
+		}
+		else
+		{
+			MouseLock();
+		}
+	}
+
+	void MouseUnlock()
+	{
 		Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+	}
+
+	void MouseLock()
+	{
+		Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 	}
 
 	public void QuitGame()
