@@ -63,8 +63,8 @@ public class PlayerInput : MonoBehaviour
             aimPressed = Input.GetMouseButton(1);
             dashPressed = Input.GetKeyDown(KeyCode.LeftShift);
             rollPressed = Input.GetKeyDown(KeyCode.LeftControl);
-            stasisActivatePressed = Input.GetMouseButton(2);
-            stasisSearchPressed = Input.GetKey(KeyCode.C);
+            stasisActivatePressed = Input.GetMouseButton(0);
+            stasisSearchPressed = Input.GetMouseButton(1);
 
             move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (move.sqrMagnitude > 1f) move.Normalize();
