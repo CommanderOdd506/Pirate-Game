@@ -35572,6 +35572,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cannonball Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 704318146225651977, guid: 55733c133a5492640a1d9e4d378b107b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2926812995199972615, guid: 55733c133a5492640a1d9e4d378b107b,
         type: 3}
       propertyPath: m_IsActive
