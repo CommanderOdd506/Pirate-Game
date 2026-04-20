@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: IMFeENsc29P SDF
+  m_Name: Pause Title
   m_EditorClassIdentifier: 
-  hashCode: -1691423978
+  hashCode: 711437202
   material: {fileID: 1365200492004514560}
-  materialHashCode: 2072561910
+  materialHashCode: 2101045490
   m_Version: 1.1.0
   m_SourceFontFileGUID: 52bab06b81e24f9498d5a76ed77f9575
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 52bab06b81e24f9498d5a76ed77f9575,
@@ -1938,7 +1938,7 @@ Material:
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0.5}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
 --- !u!28 &5310512044433017308
 Texture2D:
