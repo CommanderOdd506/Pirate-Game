@@ -18,6 +18,8 @@ public class MovingPlatform : MonoBehaviour, IStasisable
 
     public bool isStasised = false;
 
+    public event System.Action<IStasisable> OnDestroyed;
+
     void Start()
     {
         if (points == null || points.Length < 2)
@@ -64,6 +66,11 @@ public class MovingPlatform : MonoBehaviour, IStasisable
 
         // correct velocity calculation
         velocity = (transform.position - oldPosition) / Time.deltaTime;
+    }
+
+    void OnDestroy()
+    {
+        OnDestroyed?.Invoke(this);
     }
 
     public void BeginStasis() => isStasised = true;
