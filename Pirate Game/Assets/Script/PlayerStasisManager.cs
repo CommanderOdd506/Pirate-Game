@@ -76,53 +76,57 @@ public class PlayerStasisManager : MonoBehaviour
     void FindStasisTarget()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, sphereCastRange, stasisLayer);
+
         bestTarget = null;
         float bestScore = 0.7f;
-
         foreach (Collider col in hits)
         {
             stasisObject = col.GetComponent<IStasisable>();
+
             if (stasisObject == null) continue;
 
             Vector3 directionToTarget = (col.transform.position - cam.transform.position).normalized;
+
             float dot = Vector3.Dot(cam.transform.forward, directionToTarget);
+
             if (dot > bestScore)
             {
                 bestScore = dot;
                 bestTarget = stasisObject;
+                Debug.Log("New stasis item selected" + col.name);
             }
+            
         }
-
         if (bestTarget != previousTarget)
         {
             if (previousTarget != null)
-            {
                 previousTarget.OnStasisUntargeted();
-                previousTarget.OnDestroyed -= HandleTargetDestroyed; // unsubscribe old
-            }
+
             if (bestTarget != null)
-            {
                 bestTarget.OnStasisTargeted();
-                bestTarget.OnDestroyed += HandleTargetDestroyed; // subscribe new
-            }
+
             previousTarget = bestTarget;
         }
+
     }
 
     void StartStasis()
     {
+        // Stop previous stasis
         if (stasisedObject != null)
         {
             stasisedObject.EndStasis();
-            stasisedObject.OnDestroyed -= HandleStasisedDestroyed;
         }
 
+        // Stop previous timer
         if (stasisCoroutine != null)
+        {
             StopCoroutine(stasisCoroutine);
+        }
 
         bestTarget.BeginStasis();
         stasisedObject = bestTarget;
-        stasisedObject.OnDestroyed += HandleStasisedDestroyed;
+
         stasisCoroutine = StartCoroutine(StasisTimer());
     }
 
@@ -131,34 +135,11 @@ public class PlayerStasisManager : MonoBehaviour
         if (stasisedObject != null)
         {
             stasisedObject.EndStasis();
-            stasisedObject.OnDestroyed -= HandleStasisedDestroyed;
             stasisedObject = null;
         }
+
         stasisCoroutine = null;
     }
-
-    private void HandleTargetDestroyed(IStasisable destroyed)
-    {
-        destroyed.OnDestroyed -= HandleTargetDestroyed;
-
-        if (bestTarget == destroyed) bestTarget = null;
-        if (previousTarget == destroyed) previousTarget = null;
-    }
-
-    private void HandleStasisedDestroyed(IStasisable destroyed)
-    {
-        destroyed.OnDestroyed -= HandleStasisedDestroyed;
-
-        // Object is already gone so skip EndStasis(), just clean up our side
-        if (stasisCoroutine != null)
-        {
-            StopCoroutine(stasisCoroutine);
-            stasisCoroutine = null;
-        }
-        stasisedObject = null;
-    }
-
-
     private IEnumerator StasisTimer()
     {
         yield return new WaitForSeconds(stasisTimer);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public static TimeManager Instance;
+    public PlayerInput playerInput;
     public bool isPaused = false;
 
 	public float slowEffect = 0.5f;
@@ -14,34 +14,28 @@ public class TimeManager : MonoBehaviour
 	public float transitionSpeed = 4f;
 	private float targetTimeScale = 1f;
 
-    private void OnEnable()
-    {
-        PauseMenu.OnPause += Pause;
-    }
+	public GameObject returnButton;
+	
 
-    private void OnDisable()
-    {
-        PauseMenu.OnResume += Resume;
-    }
-
-
-    void Awake()
-	{
-        if (Instance != null)
-        {
-            Destroy(this.gameObject);
-        }
-
-        Instance = this;
-
-    }
     // Start is called before the first frame update
+    void Start()
+    {
+        returnButton.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if(playerInput.pausePressed && !isSlowed)
+		{
+			if(isPaused)
+				Resume();
 
-		if (PlayerInput.Instance.stasisSearchPressed && !PauseMenu.Instance.IsPaused)
+			else
+				Pause();
+		}
+
+		if (playerInput.stasisSearchPressed && !isPaused)
 		{
 			targetTimeScale = slowEffect;
 			isSlowed = true;
@@ -52,7 +46,7 @@ public class TimeManager : MonoBehaviour
 			isSlowed = false;
 		}
 
-		if(!PauseMenu.Instance.IsPaused && Time.timeScale != targetTimeScale)
+		if(!isPaused)
 		{
 			//using a lerp to smooth in and out of slowed time
 			Time.timeScale = Mathf.Lerp(Time.timeScale, targetTimeScale, Time.unscaledDeltaTime * transitionSpeed);
@@ -62,18 +56,25 @@ public class TimeManager : MonoBehaviour
 		
     }
 
-	private void SetTimeScale(float timeScale)
-	{
-		targetTimeScale = timeScale;
-	}
-
     public void Pause()
 	{
 		Time.timeScale = 0f;
+		isPaused = true;
+
+		returnButton.SetActive(true);
+
+		Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 	}
 
 	public void Resume()
 	{
 		Time.timeScale = 1;
+		isPaused = false;
+
+		returnButton.SetActive(false);
+
+		Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 	}
 }

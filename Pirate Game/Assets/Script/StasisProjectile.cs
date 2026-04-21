@@ -5,37 +5,40 @@ using UnityEngine;
 public class StasisProjectile : MonoBehaviour, IStasisable
 {
     [SerializeField] private float speed;
+
     [SerializeField] Renderer rend;
     [SerializeField] Material normalMat;
     [SerializeField] Material highlightMat;
 
     private bool isStasised = false;
 
-    public event System.Action<IStasisable> OnDestroyed;
 
     void Update()
     {
-        if (!isStasised)
+        if(!isStasised)
+        {
             transform.position += transform.forward * speed * Time.deltaTime;
+        }
+
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (isStasised) return;
-
-        if (collision.gameObject.CompareTag("Player"))
-            CheckpointManager.Instance.RespawnPlayer();
-
-        Destroy(gameObject);
+        if (!isStasised)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                //TO-DO Kill Player;
+            }
+            Destroy(this.gameObject);
+        }
     }
 
-    void OnDestroy()
-    {
-        OnDestroyed?.Invoke(this);
-    }
+    //stasis Implementation;
 
     public void BeginStasis() => isStasised = true;
     public void EndStasis() => isStasised = false;
+
     public void OnStasisTargeted() => rend.material = highlightMat;
     public void OnStasisUntargeted() => rend.material = normalMat;
 }
