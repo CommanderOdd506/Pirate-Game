@@ -70,7 +70,7 @@ public class InteractionManager : MonoBehaviour
         {
             promptUI.gameObject.SetActive(true);
         }
-        else if (canInteract && PauseMenu.Instance.IsPaused)
+        else //if (canInteract && PauseMenu.Instance.IsPaused)
         {
             promptUI.gameObject.SetActive(false);
         }
