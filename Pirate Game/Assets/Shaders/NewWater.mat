@@ -109,6 +109,10 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _Foam_Amount: 1.72
+    - _Foam_Cutoff: 7.2
+    - _Foam_Scale: 30
+    - _Foam_Speed: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -139,6 +143,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Deep_Color: {r: 0.20392154, g: 0.5861628, b: 0.8392157, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Foam_Color: {r: 1, g: 1, b: 1, a: 0}
     - _RippleColor: {r: 0.27830186, g: 0.809199, b: 1, a: 0}
     - _Shallow_Color: {r: 0.43961373, g: 0.6920495, b: 0.8396226, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
