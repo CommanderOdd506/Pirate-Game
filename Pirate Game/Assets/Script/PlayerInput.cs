@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInput : MonoBehaviour
 {
+    public static PlayerInput Instance;
+
     [Header("Movement")]
     public Vector2 move;
     public bool sprintHeld;
@@ -39,6 +41,15 @@ public class PlayerInput : MonoBehaviour
         canInput = value;
     }
 
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+
+        Instance = this;    
+    }
     void Start()
     {
         currentScene = SceneManager.GetActiveScene();
