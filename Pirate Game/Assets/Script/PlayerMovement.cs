@@ -34,8 +34,6 @@ public class PlayerMovement : MonoBehaviour
     public float rollSpeed = 8f;
     public float rollDuration = 0.6f;
     public float rollCooldown = 1f;
-    public float rollCrouchHeight = 0.5f;   // hitbox height while rolling
-    public float rollCrouchCenter = 0.25f;  // center.y offset while rolling
 
     //properties
     public bool IsGrounded => isGrounded;
@@ -73,15 +71,11 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash;
     private MovingPlatform currentPlatform;
     private bool hasDashed;
-    private float _defaultHeight;
-    private Vector3 _defaultCenter;
 
     void Awake()
     {
         if (!controller) controller = GetComponent<CharacterController>();
         _timeSinceJumpPressed = jumpBuffer + 0.01f;
-        _defaultHeight = controller.height;
-        _defaultCenter = controller.center;
     }
 
     void Start()
@@ -179,12 +173,7 @@ public class PlayerMovement : MonoBehaviour
             horizontal = abilityDirection * rollSpeed;
 
             if (rollTimer <= 0f)
-            {
                 isRolling = false;
-                controller.height = _defaultHeight;
-                controller.center = _defaultCenter;
-            }
-                
         }
         else
         {
@@ -268,14 +257,12 @@ public class PlayerMovement : MonoBehaviour
 
     void StartRoll(Vector3 moveDir)
     {
+        Debug.Log("Roll");
         OnRoll?.Invoke();
         isRolling = true;
         rollTimer = rollDuration;
         rollCooldownTimer = rollCooldown;
-        abilityDirection = moveDir.sqrMagnitude > 0.01f ? moveDir.normalized : transform.forward;
 
-        // Shrink hitbox
-        controller.height = rollCrouchHeight;
-        controller.center = new Vector3(0f, rollCrouchCenter, 0f);
+        abilityDirection = moveDir.sqrMagnitude > 0.01f ? moveDir.normalized : transform.forward;
     }
 }
