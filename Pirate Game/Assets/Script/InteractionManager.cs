@@ -24,11 +24,8 @@ public class InteractionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canInteract & playerInput.interactPressed)
-        {
-            //if currentinteractable is not null call the function
-            currentInteractable?.OnInteract();
-        }
+        HandleInteraction();
+        PauseLogicUI();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,7 +40,7 @@ public class InteractionManager : MonoBehaviour
             canInteract = true;
             currentInteractable = interactable;
 
-            promptUI.gameObject.SetActive(true);
+            promptUI.text = $"Press \"F\" to interact with {other.gameObject.name}";
         }
     }
 
@@ -55,7 +52,26 @@ public class InteractionManager : MonoBehaviour
         {
             canInteract = false;
             currentInteractable = null;
+        }
+    }
 
+    private void HandleInteraction()
+    {
+        if(canInteract && playerInput.interactPressed)
+        {
+            //if currentinteractable is not null call the function
+            currentInteractable?.OnInteract();
+        }
+    }
+
+    private void PauseLogicUI()
+    {
+        if (canInteract && !PauseMenu.Instance.IsPaused)
+        {
+            promptUI.gameObject.SetActive(true);
+        }
+        else if (canInteract && PauseMenu.Instance.IsPaused)
+        {
             promptUI.gameObject.SetActive(false);
         }
     }

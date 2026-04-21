@@ -6367,7 +6367,7 @@ Transform:
   m_GameObject: {fileID: 1061227992}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.73, y: 5.45, z: 192.76}
+  m_LocalPosition: {x: -4.73, y: 6.37, z: -31.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10780,6 +10780,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1943967234}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1985756616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2958307884744111804, guid: 5f9898b94d0c31b4c87476cde6e4318f,
+    type: 3}
+  m_PrefabInstance: {fileID: 833296885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2022352049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12237,6 +12249,11 @@ PrefabInstance:
       propertyPath: promptUI
       value: 
       objectReference: {fileID: 747390090}
+    - target: {fileID: 3752376808366535656, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: stasisReticle
+      value: 
+      objectReference: {fileID: 1985756616}
     - target: {fileID: 4706135104466363557, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_Name
