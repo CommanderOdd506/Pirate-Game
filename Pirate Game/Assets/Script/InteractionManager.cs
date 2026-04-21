@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -10,12 +11,14 @@ public class InteractionManager : MonoBehaviour
     public PlayerInput playerInput;
     public SceneManager sceneManager;
 
+    public TextMeshProUGUI promptUI;
+
     public bool canInteract = false;
     private IInteract currentInteractable;
 
     void Start()
     {
-        
+        promptUI.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,6 +42,8 @@ public class InteractionManager : MonoBehaviour
             //you can interact if it exists
             canInteract = true;
             currentInteractable = interactable;
+
+            promptUI.gameObject.SetActive(true);
         }
     }
 
@@ -50,6 +55,8 @@ public class InteractionManager : MonoBehaviour
         {
             canInteract = false;
             currentInteractable = null;
+
+            promptUI.gameObject.SetActive(false);
         }
     }
 }
