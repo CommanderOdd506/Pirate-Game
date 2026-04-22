@@ -38,14 +38,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Depth_Bias: 0.01
     - _Foam_Amount: 0.2
     - _Foam_Cutoff: 1
     - _Foam_Scale: 25
-    - _Foam_Speed: 0.2
+    - _Foam_Speed: -2.07
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Softness: 0.5
-    - _Water_Depth: 0.03
+    - _Water_Depth: 0.5
     - _Wave_Amplitude: 0.1
     - _Wave_Frequency: 0.1
     - _Wave_Speed: 0.1

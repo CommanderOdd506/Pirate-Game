@@ -10,7 +10,9 @@ public class InteractionManager : MonoBehaviour
 
     public PlayerInput playerInput;
     public SceneManager sceneManager;
+
     public TextMeshProUGUI promptUI;
+
     public bool canInteract = false;
     private IInteract currentInteractable;
 
@@ -22,7 +24,6 @@ public class InteractionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         HandleInteraction();
         PauseLogicUI();
     }
@@ -51,14 +52,12 @@ public class InteractionManager : MonoBehaviour
         {
             canInteract = false;
             currentInteractable = null;
-
-            
         }
     }
 
     private void HandleInteraction()
     {
-        if (canInteract && playerInput.interactPressed)
+        if(canInteract && playerInput.interactPressed)
         {
             //if currentinteractable is not null call the function
             currentInteractable?.OnInteract();

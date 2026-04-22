@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NewWater
+  m_Name: Level 1 Ocean Water 1
   m_Shader: {fileID: -6465566751694194690, guid: 705fc29056c32e242bd267e7f5b7e85e,
     type: 3}
   m_Parent: {fileID: 0}
@@ -110,10 +110,10 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Foam_Amount: 1.17
+    - _Foam_Amount: 2.46
     - _Foam_Cutoff: 1
-    - _Foam_Scale: 25
-    - _Foam_Speed: 0.01
+    - _Foam_Scale: 40
+    - _Foam_Speed: 0.005
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -135,7 +135,7 @@ Material:
     - _Surface: 0
     - _Water_Depth: 0.07
     - _WaveSpeed: 0.05
-    - _Wave_Amplitude: 0.05
+    - _Wave_Amplitude: 0.09
     - _Wave_Frequency: 1.68
     - _Wave_Speed: 2.22
     - _WorkflowMode: 1

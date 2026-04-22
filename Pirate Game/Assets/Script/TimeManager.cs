@@ -70,10 +70,12 @@ public class TimeManager : MonoBehaviour
     public void Pause()
 	{
 		Time.timeScale = 0f;
+		isPaused = true;
 	}
 
 	public void Resume()
 	{
 		Time.timeScale = 1;
+		isPaused = false;
 	}
 }
