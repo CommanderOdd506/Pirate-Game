@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -104,6 +103,7 @@ public class PauseMenu : MonoBehaviour
                 pausePanel.SetActive(true);
             OpenMainPage();
 
+           
         }
     }
 

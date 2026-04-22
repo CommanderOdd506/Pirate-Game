@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class PlayerStasisManager : MonoBehaviour
@@ -14,8 +13,6 @@ public class PlayerStasisManager : MonoBehaviour
 
     [SerializeField] private GameObject standardPost;
     [SerializeField] private GameObject stasisPost;
-
-    [SerializeField] private Image stasisReticle;
 
     IStasisable bestTarget = null;
     IStasisable previousTarget = null;
@@ -32,22 +29,19 @@ public class PlayerStasisManager : MonoBehaviour
     {
         cam = GetComponentInChildren<Camera>();
         playerInput = GetComponent<PlayerInput>();
-        stasisReticle.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.stasisSearchPressed && !PauseMenu.Instance.IsPaused)
+        if (playerInput.stasisSearchPressed)
         {
             FindStasisTarget();
             SetPostProcessing(true);
-            stasisReticle.gameObject.SetActive(true);
         }
         else
         {
             SetPostProcessing(false);
-            stasisReticle.gameObject.SetActive(false);
         }
         if (playerInput.stasisActivatePressed && bestTarget != null)
         {
