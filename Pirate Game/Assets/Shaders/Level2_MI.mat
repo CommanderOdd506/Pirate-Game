@@ -25,7 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Foam_Scale: 20
+    - _Wave_Amplitude: 0.001
+    - _Wave_Frequency: 1
+    - _Wave_Speed: 1
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &3997983608264906167
