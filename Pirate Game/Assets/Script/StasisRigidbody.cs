@@ -9,8 +9,8 @@ public class StasisRigidbody : MonoBehaviour,IStasisable
     [SerializeField] Material normalMat;
     [SerializeField] Material highlightMat;
     private Rigidbody rb;
+    private bool isStasised = false;
 
-    
     public event System.Action<IStasisable> OnDestroyed;
 
     void Awake()
@@ -21,14 +21,23 @@ public class StasisRigidbody : MonoBehaviour,IStasisable
     {
         OnDestroyed?.Invoke(this);
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (isStasised) return;
 
+        if (collision.gameObject.CompareTag("Player"))
+            CheckpointManager.Instance.RespawnPlayer();
+
+    }
     public void BeginStasis()
     {
         rb.isKinematic = true;
+        isStasised = true;
     } 
     public void EndStasis()
     {
         rb.isKinematic = false;
+        isStasised = false;  
     }
     public void OnStasisTargeted() => rend.material = highlightMat;
     public void OnStasisUntargeted() => rend.material = normalMat;

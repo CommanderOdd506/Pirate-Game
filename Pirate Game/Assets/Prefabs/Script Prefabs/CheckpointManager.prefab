@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbdff80942dd2784aa48f54c4557aba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathDelayTime: 2
   startingCheckpoint: {fileID: 0}
   player: {fileID: 0}
+  deathVignette: {fileID: 0}

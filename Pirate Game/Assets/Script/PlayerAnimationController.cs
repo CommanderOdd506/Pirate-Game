@@ -17,16 +17,30 @@ public class PlayerAnimationController : MonoBehaviour
     private void OnEnable()
     {
         PlayerMovement.OnJump += HandleJumpAnimation;
+        CheckpointManager.OnPlayerDie += HandleDieAnimation;
+        CheckpointManager.OnPlayerRespawn += HandleRespawnAnimation;
     }
 
     private void OnDisable()
     {
         PlayerMovement.OnJump -= HandleJumpAnimation;
+        CheckpointManager.OnPlayerDie -= HandleDieAnimation;
+        CheckpointManager.OnPlayerRespawn -= HandleRespawnAnimation;
     }
 
     void HandleJumpAnimation()
     {
         animator.SetTrigger("Jump");
+    }
+
+    void HandleDieAnimation()
+    {
+        animator.SetTrigger("Die");
+    }
+
+    void HandleRespawnAnimation()
+    {
+        animator.SetTrigger("Respawn");
     }
 
     void UpdateAnimator()

@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -11,12 +13,15 @@ public class CheckpointManager : MonoBehaviour
 
     // Fired when the player respawns at the last checkpoint.
     // Passes the respawn position so listeners can react.
-    public static event Action<Vector3> OnPlayerRespawn;
+    public static event Action OnPlayerRespawn;
+    public static event Action OnPlayerDie;
+    public float DeathDelayTime;
 
     public Checkpoint ActiveCheckpoint { get; private set; }
     public Checkpoint startingCheckpoint;
     [Header("References")]
     [SerializeField] private Transform player;
+    [SerializeField] DeathVignette deathVignette;
 
     private void Awake()
     {
@@ -52,6 +57,19 @@ public class CheckpointManager : MonoBehaviour
             Debug.LogWarning("[Checkpoint] No active checkpoint to respawn at.");
             return;
         }
+        deathVignette?.FadeIn();
+
+        OnPlayerDie?.Invoke();
+
+        StartCoroutine(DeathDelay());
+        Debug.Log($"[Checkpoint] Respawned at {ActiveCheckpoint.name}");
+    }
+    private IEnumerator DeathDelay()
+    {
+        yield return new WaitForSeconds(DeathDelayTime);
+
+        deathVignette?.FadeOut();
+
         CharacterController cc = player.GetComponent<CharacterController>();
 
         Vector3 respawnPos = ActiveCheckpoint.RespawnPoint;
@@ -60,12 +78,12 @@ public class CheckpointManager : MonoBehaviour
         {
             cc.enabled = false;
             player.SetPositionAndRotation(respawnPos, respawnRot);
+            yield return null;
             cc.enabled = true;
         }
-        
 
-        OnPlayerRespawn?.Invoke(respawnPos);
 
-        Debug.Log($"[Checkpoint] Respawned at {ActiveCheckpoint.name}");
+        OnPlayerRespawn?.Invoke();
+
     }
 }
