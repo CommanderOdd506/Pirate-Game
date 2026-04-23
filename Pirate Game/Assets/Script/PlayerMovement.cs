@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsRolling => isRolling;
 
     public float VerticalVelocity => _velocity.y;
-    public bool HasMovementInput => input.move.sqrMagnitude > 0.01f;
+    public bool HasMovementInput => input.move.sqrMagnitude > 0.01f && isAlive;
     public bool IsMoving => HasMovementInput && isGrounded && !isDashing && !isRolling;
     public float CurrentHorizontalSpeed => _currentSpeed;
 
@@ -75,10 +75,25 @@ public class PlayerMovement : MonoBehaviour
     private bool hasDashed;
     private float _defaultHeight;
     private Vector3 _defaultCenter;
+    private bool isAlive = true;
+
+    void OnEnable()
+    {
+        CheckpointManager.OnPlayerDie += Die;
+        CheckpointManager.OnPlayerRespawn += Respawn;
+    }
+
+    void OnDisable()
+    {
+        CheckpointManager.OnPlayerDie -= Die;
+        CheckpointManager.OnPlayerRespawn -= Respawn;
+    }
 
     void Awake()
     {
         if (!controller) controller = GetComponent<CharacterController>();
+
+        
         _timeSinceJumpPressed = jumpBuffer + 0.01f;
         _defaultHeight = controller.height;
         _defaultCenter = controller.center;
@@ -94,6 +109,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void Die()
+    {
+        isAlive = false;
+    }
+
+    void Respawn()
+    {
+        isAlive = true;
+    }
 
 
     bool IsInMapScene()
@@ -118,12 +142,19 @@ public class PlayerMovement : MonoBehaviour
         camRight.y = 0f;
         camRight.Normalize();
 
-
-        //Collect Input
         isGrounded = controller.isGrounded;
-        Vector2 move = input.move;
-        bool sprintHeld = input.sprintHeld;
-        bool jumpPressed = input.jumpPressed;
+        Vector2 move = Vector2.zero;
+        bool sprintHeld = false;
+        bool jumpPressed = false;
+        //Collect Input
+        if (isAlive)
+        { 
+            move = input.move;
+            sprintHeld = input.sprintHeld;
+            jumpPressed = input.jumpPressed;
+
+        }
+        
 
         //timers 
 
