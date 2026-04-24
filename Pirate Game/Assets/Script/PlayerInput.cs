@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 
 public class PlayerInput : MonoBehaviour
 {
     public static PlayerInput Instance;
+
+    private PlayerControls controls;
 
     [Header("Movement")]
     public Vector2 move;
@@ -49,6 +52,8 @@ public class PlayerInput : MonoBehaviour
         }
 
         Instance = this;    
+
+        controls = new PlayerControls();
     }
     void Start()
     {
@@ -65,7 +70,7 @@ public class PlayerInput : MonoBehaviour
         //disabling inputs based on scene, if it is any scene other than 4 (map scene) you are 3d and can use all abilities
         if(currentScene.buildIndex != 5)
         {
-            sprintHeld = Input.GetKey(KeyCode.LeftShift);
+            /*sprintHeld = Input.GetKey(KeyCode.LeftShift);
             interactPressed = Input.GetKeyDown(KeyCode.F);
             reloadPressed = Input.GetKeyDown(KeyCode.R);
             pausePressed = Input.GetKeyDown(KeyCode.Escape);
@@ -75,19 +80,30 @@ public class PlayerInput : MonoBehaviour
             dashPressed = Input.GetKeyDown(KeyCode.LeftShift);
             rollPressed = Input.GetKeyDown(KeyCode.LeftControl);
             stasisActivatePressed = Input.GetMouseButton(0);
-            stasisSearchPressed = Input.GetMouseButton(1);
+            stasisSearchPressed = Input.GetMouseButton(1);*/
 
-            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            //sprintHeld = controls.Gameplay.Sprint.IsPressed();
+
+            interactPressed = controls.Gameplay.Interact.WasPressedThisFrame();
+            pausePressed = controls.Gameplay.Pause.WasPressedThisFrame();
+            jumpPressed = controls.Gameplay.Jump.WasPressedThisFrame();
+            dashPressed = controls.Gameplay.Dash.WasPressedThisFrame();
+            rollPressed = controls.Gameplay.Roll.WasPressedThisFrame();
+
+            stasisActivatePressed = controls.Gameplay.StasisFire.IsPressed();
+            stasisSearchPressed = controls.Gameplay.StasisSearch.IsPressed();
+
+            move = controls.Gameplay.Movement.ReadValue<Vector2>();
             if (move.sqrMagnitude > 1f) move.Normalize();
         }
         //if you are in map scene, you can only interact and pause as well as move
         else
         {
-            interactPressed = Input.GetKeyDown(KeyCode.F);
-            pausePressed = Input.GetKeyDown(KeyCode.Escape);
+            interactPressed = controls.Gameplay.Interact.WasPressedThisFrame();
+            pausePressed = controls.Gameplay.Pause.WasPressedThisFrame();
 
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
+            float horizontal = controls.Gameplay.Movement.ReadValue<Vector2>().x;
+            float vertical = controls.Gameplay.Movement.ReadValue<Vector2>().y;
 
 
             // Only allow movement with forward input
@@ -107,4 +123,15 @@ public class PlayerInput : MonoBehaviour
 
         
     }
+
+    void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.Disable();
+    }
 }
+
