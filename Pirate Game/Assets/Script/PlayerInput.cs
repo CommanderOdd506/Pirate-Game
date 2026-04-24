@@ -29,6 +29,7 @@ public class PlayerInput : MonoBehaviour
 
     [Header("Combat")]
     public bool reloadPressed;
+    public bool shootKey;
 
     [Header("Util")]
     public bool pausePressed;
@@ -92,6 +93,8 @@ public class PlayerInput : MonoBehaviour
 
             stasisActivatePressed = controls.Gameplay.StasisFire.IsPressed();
             stasisSearchPressed = controls.Gameplay.StasisSearch.IsPressed();
+
+            shootKey = controls.Gameplay.ShootKey.WasPressedThisFrame();
 
             move = controls.Gameplay.Movement.ReadValue<Vector2>();
             if (move.sqrMagnitude > 1f) move.Normalize();
