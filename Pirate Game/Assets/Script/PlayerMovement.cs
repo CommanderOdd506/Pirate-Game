@@ -76,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
     private float _defaultHeight;
     private Vector3 _defaultCenter;
     private bool isAlive = true;
+    private Vector3 _slopePush;
 
     void OnEnable()
     {
@@ -93,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!controller) controller = GetComponent<CharacterController>();
 
-        
         _timeSinceJumpPressed = jumpBuffer + 0.01f;
         _defaultHeight = controller.height;
         _defaultCenter = controller.center;
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     {
         input = GetComponent<PlayerInput>();
         Cursor.lockState = CursorLockMode.Locked;
-        if(IsInMapScene())
+        if (IsInMapScene())
         {
             inMapScene = true;
         }
@@ -119,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
         isAlive = true;
     }
 
-
     bool IsInMapScene()
     {
         return SceneManager.GetActiveScene().name == "MapScene";
@@ -128,6 +127,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetPlatform(MovingPlatform platform)
     {
         currentPlatform = platform;
+    }
+
+    public void AddSlopePush(Vector3 push)
+    {
+        _slopePush += push;
     }
 
     void Update()
@@ -148,16 +152,13 @@ public class PlayerMovement : MonoBehaviour
         bool jumpPressed = false;
         //Collect Input
         if (isAlive)
-        { 
+        {
             move = input.move;
             sprintHeld = input.sprintHeld;
             jumpPressed = input.jumpPressed;
-
         }
-        
 
         //timers 
-
         if (jumpPressed) _timeSinceJumpPressed = 0f; else _timeSinceJumpPressed += Time.deltaTime;
 
         if (isGrounded) _timeSinceLeftGround = 0f; else _timeSinceLeftGround += Time.deltaTime;
@@ -166,12 +167,12 @@ public class PlayerMovement : MonoBehaviour
         dashCooldownTimer -= Time.deltaTime;
         rollCooldownTimer -= Time.deltaTime;
 
-       if(isGrounded && !canDoubleJump)
+        if (isGrounded && !canDoubleJump)
         {
             canDoubleJump = true;
         }
 
-        if(isGrounded && hasDashed)
+        if (isGrounded && hasDashed)
         {
             hasDashed = false;
         }
@@ -215,7 +216,6 @@ public class PlayerMovement : MonoBehaviour
                 controller.height = _defaultHeight;
                 controller.center = _defaultCenter;
             }
-                
         }
         else
         {
@@ -231,7 +231,6 @@ public class PlayerMovement : MonoBehaviour
         //apply speed
         _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, 10 * Time.deltaTime);
 
-       
         //JUMP
 
         //timer check bools 
@@ -244,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
             _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
             OnJump?.Invoke();
         }
-        else if(bufferedJump && canDoubleJump && !usingAbilities)
+        else if (bufferedJump && canDoubleJump && !usingAbilities)
         {
             canDoubleJump = false;
             _timeSinceJumpPressed = jumpBuffer + 1f;
@@ -262,14 +261,11 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-
         //cancel gravity
         if (isDashing)
         {
             _velocity.y = 0;
         }
-
-        Vector3 platformMotion = Vector3.zero;
 
         // Apply platform movement FIRST
         if (currentPlatform != null)
@@ -277,9 +273,10 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(currentPlatform.velocity * Time.deltaTime);
         }
 
-        // Then apply player movement
-        Vector3 motion = horizontal + new Vector3(0f, _velocity.y, 0f);
+        // combine player motion with accumulated slope push then reset
+        Vector3 motion = horizontal + new Vector3(0f, _velocity.y, 0f) + _slopePush;
         controller.Move(motion * Time.deltaTime);
+        _slopePush = Vector3.zero;
     }
 
 
