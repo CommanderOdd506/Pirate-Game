@@ -12,6 +12,6 @@ public class Collectible : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         CollectibleSystem.Instance.Add(id, value);
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 }
