@@ -5406,6 +5406,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f9898b94d0c31b4c87476cde6e4318f, type: 3}
+--- !u!114 &833296886 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2780989648655566764, guid: 5f9898b94d0c31b4c87476cde6e4318f,
+    type: 3}
+  m_PrefabInstance: {fileID: 833296885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e0d0e9e7c130544b262d855026b46b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &837782761
 GameObject:
   m_ObjectHideFlags: 17
@@ -14879,6 +14891,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2387784634913515729}
+    - target: {fileID: 8790221718739427170, guid: 9f7bb277f7722b948b294a5c27c77af9,
+        type: 3}
+      propertyPath: deathVignette
+      value: 
+      objectReference: {fileID: 833296886}
     - target: {fileID: 8790221718739427170, guid: 9f7bb277f7722b948b294a5c27c77af9,
         type: 3}
       propertyPath: startingCheckpoint
