@@ -1,13 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class DELETELATERCanonscript : MonoBehaviour
 {
+    private PlayerControls controls;
+
     public Transform loadPoint;
     public Transform landingPoint;
     public float launchHeight = 5f;
-    public KeyCode shootKey = KeyCode.Space;
 
     public GameObject interactUI;
     public TextMeshProUGUI interactText;
@@ -28,6 +30,7 @@ public class DELETELATERCanonscript : MonoBehaviour
 
     private void Start()
     {
+
         line = GetComponent<LineRenderer>();
         line.enabled = true;
 
@@ -44,10 +47,10 @@ public class DELETELATERCanonscript : MonoBehaviour
             if (interactUI != null)
             {
                 interactUI.SetActive(true);
-                interactText.text = "Press " + shootKey + " to shoot";
+                interactText.text = "Press Space to shoot";
             }
 
-            if (Input.GetKeyDown(shootKey))
+            if (PlayerInput.Instance != null && PlayerInput.Instance.shootKey)
             {
                 ShootPlayer();
             }
