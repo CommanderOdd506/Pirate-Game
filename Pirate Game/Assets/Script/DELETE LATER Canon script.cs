@@ -47,7 +47,7 @@ public class DELETELATERCanonscript : MonoBehaviour
             if (interactUI != null)
             {
                 interactUI.SetActive(true);
-                interactText.text = "Press Space to shoot";
+                interactText.text = "Press Fire to shoot";
             }
 
             if (PlayerInput.Instance != null && PlayerInput.Instance.shootKey)
