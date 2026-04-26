@@ -42,7 +42,7 @@ Material:
     - _Foam_Amount: 0.2
     - _Foam_Cutoff: 1
     - _Foam_Scale: 25
-    - _Foam_Speed: -2.07
+    - _Foam_Speed: 0.05
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Softness: 0.5
@@ -54,6 +54,7 @@ Material:
     - _Deep_Color: {r: 0.30704877, g: 0.7166226, b: 0.9433962, a: 0}
     - _Foam_Color: {r: 1.3089378, g: 1.1916274, b: 1.1916274, a: 1}
     - _Shallow_Color: {r: 0.05887323, g: 0.4958055, b: 0.9058824, a: 0}
+    - _WaveDirection: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4494766742902372135
 MonoBehaviour:
