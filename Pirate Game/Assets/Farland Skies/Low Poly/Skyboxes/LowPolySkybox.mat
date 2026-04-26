@@ -62,7 +62,7 @@ Material:
     m_Colors:
     - _BottomColor: {r: 0.032786846, g: 0, b: 1, a: 1}
     - _CloudsTint: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
-    - _MiddleColor: {r: 0.75627446, g: 0.9716981, b: 0.9396137, a: 1}
+    - _MiddleColor: {r: 0.47472408, g: 0.6764199, b: 0.7924528, a: 1}
     - _MoonTint: {r: 0.491, g: 0.53774476, b: 1, a: 1}
     - _SkyBottomColor: {r: 0.016868481, g: 0, b: 0.47794116, a: 0}
     - _SkyColor: {r: 0.03529412, g: 0.41960788, b: 0.59607846, a: 1}
@@ -73,5 +73,5 @@ Material:
     - _SkyTopColor: {r: 0.2794118, g: 0.6421905, b: 1, a: 0}
     - _StarsTint: {r: 1, g: 1, b: 1, a: 1}
     - _SunTint: {r: 0.703, g: 0.55044055, b: 0.366966, a: 1}
-    - _TopColor: {r: 0, g: 1, b: 0.9532709, a: 1}
+    - _TopColor: {r: 0, g: 0.32140875, b: 1, a: 1}
   m_BuildTextureStacks: []
