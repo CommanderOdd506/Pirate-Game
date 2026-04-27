@@ -16,6 +16,9 @@ public class CheckpointManager : MonoBehaviour
     public static event Action OnPlayerRespawn;
     public static event Action OnPlayerDie;
     public float DeathDelayTime;
+    private int deaths;
+
+    public int Deaths => deaths;
 
     public Checkpoint ActiveCheckpoint { get; private set; }
     public Checkpoint startingCheckpoint;
@@ -31,6 +34,7 @@ public class CheckpointManager : MonoBehaviour
 
     private void Start()
     {
+        deaths = 0;
         if (startingCheckpoint) { SetCheckpoint(startingCheckpoint); }
     }
     /// <summary>
@@ -60,6 +64,8 @@ public class CheckpointManager : MonoBehaviour
         deathVignette?.FadeIn();
 
         OnPlayerDie?.Invoke();
+
+        deaths++;
 
         StartCoroutine(DeathDelay());
         Debug.Log($"[Checkpoint] Respawned at {ActiveCheckpoint.name}");
