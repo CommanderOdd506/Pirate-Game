@@ -35,6 +35,7 @@ public class PlayerInput : MonoBehaviour
     public bool pausePressed;
     public float horizontalBoatInputSmoothing = 10f;
     public float verticalBoatInputSmoothing = 10f;
+    public float horizontalBoatTurnStrength = 0.2f;
 
     private bool canInput = true;
     //checking what scene we are in
@@ -108,23 +109,26 @@ public class PlayerInput : MonoBehaviour
             float horizontal = controls.Gameplay.Movement.ReadValue<Vector2>().x;
             float vertical = controls.Gameplay.Movement.ReadValue<Vector2>().y;
 
+            float clampedVertical = Mathf.Max(0f, vertical);
+            float dampedHorizontal = clampedVertical > 0f ? horizontal : horizontal * horizontalBoatTurnStrength;
 
-            // Only allow movement with forward input
-            if (vertical > 0f)
+            if (dampedHorizontal != 0f || clampedVertical != 0f)
             {
-                move = new Vector2(horizontal, vertical);
+                move = new Vector2(dampedHorizontal, clampedVertical);
 
                 if (move.sqrMagnitude > 1f)
                     move.Normalize();
             }
             else
             {
-                //move = Vector2.Lerp(move, Vector2.zero, 10f * Time.deltaTime);
-                move = new Vector2(Mathf.Lerp(move.x, 0, horizontalBoatInputSmoothing * Time.deltaTime), Mathf.Lerp(move.y, 0, verticalBoatInputSmoothing * Time.deltaTime));
+                move = new Vector2(
+                    Mathf.Lerp(move.x, 0, horizontalBoatInputSmoothing * Time.deltaTime),
+                    Mathf.Lerp(move.y, 0, verticalBoatInputSmoothing * Time.deltaTime)
+                );
             }
         }
 
-        
+
     }
 
     void OnEnable()

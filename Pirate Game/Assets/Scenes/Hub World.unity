@@ -6351,6 +6351,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7801282151327942106, guid: 5f9898b94d0c31b4c87476cde6e4318f,
+        type: 3}
+      propertyPath: freeLookCamera
+      value: 
+      objectReference: {fileID: 2387784634913515730}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13070,6 +13075,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6031901225567604140, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.65142167
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031901225567604140, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5625002
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031901225567604140, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.1579194
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031901225567604140, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99873316
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031901225567604140, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.021778252
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031901225567604140, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.045352202
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031901225567604140, guid: 56dcf015ac890ff4dae5897b8646156b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0009889446
+      objectReference: {fileID: 0}
     - target: {fileID: 6288931168673030001, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13195,6 +13235,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2387784634913515728}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2387784634913515730 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1783836751920273128, guid: 56dcf015ac890ff4dae5897b8646156b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2387784634913515728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 319d2fe34a804e245819465c9505ea59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2387784634913515738
 MonoBehaviour:
   m_ObjectHideFlags: 0

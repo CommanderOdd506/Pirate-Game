@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SFXManager : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class SFXManager : MonoBehaviour
     //public CollectibleSystem collectible;
     public SoundLibrary[] sounds;
 
+    public AudioMixerGroup mainAudioMixer;
+
     //private int jumpCount = 0;
-    
+
     public static SFXManager instance;
 
     void Awake()
@@ -91,7 +94,7 @@ public class SFXManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-
+            s.source.outputAudioMixerGroup = mainAudioMixer;
         }
     }
 
