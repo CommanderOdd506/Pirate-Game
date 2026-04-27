@@ -61,7 +61,7 @@ public class ScoreManager : MonoBehaviour
     {
          playerAnimator.SetTrigger("Win");
          playerInput.enabled = false;
-        playerMovement.enabled = false;
+         playerMovement.enabled = false;
          Cursor.lockState = CursorLockMode.None;
          Cursor.visible = true;
          freeLookCam.gameObject.SetActive(false);
