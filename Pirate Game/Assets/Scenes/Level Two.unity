@@ -4623,17 +4623,17 @@ PrefabInstance:
     - target: {fileID: 117700657808422677, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.058265507
+      value: 0.05826543
       objectReference: {fileID: 0}
     - target: {fileID: 117700657808422677, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.036574595
+      value: -0.036574587
       objectReference: {fileID: 0}
     - target: {fileID: 117700657808422677, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0021361024
+      value: 0.0021360966
       objectReference: {fileID: 0}
     - target: {fileID: 661099679385787082, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
@@ -4648,12 +4648,12 @@ PrefabInstance:
     - target: {fileID: 661099679385787082, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.036608834
+      value: -0.036608838
       objectReference: {fileID: 0}
     - target: {fileID: 661099679385787082, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0014341129
+      value: 0.0014341115
       objectReference: {fileID: 0}
     - target: {fileID: 1783836751920273128, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
@@ -4863,17 +4863,17 @@ PrefabInstance:
     - target: {fileID: 7700628494285285222, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.020011699
+      value: 0.02001166
       objectReference: {fileID: 0}
     - target: {fileID: 7700628494285285222, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.03662957
+      value: -0.03662956
       objectReference: {fileID: 0}
     - target: {fileID: 7700628494285285222, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00073365937
+      value: 0.0007336569
       objectReference: {fileID: 0}
     - target: {fileID: 8428610302788081264, guid: 56dcf015ac890ff4dae5897b8646156b,
         type: 3}
@@ -15731,6 +15731,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2129001163}
     m_Modifications:
+    - target: {fileID: 871785511094678181, guid: e72f32fbfeb9ec244b37efec7ee6805b,
+        type: 3}
+      propertyPath: mainAudioMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: fec468908cd818845af88f9b52f3fa6d,
+        type: 2}
+    - target: {fileID: 871785511094678181, guid: e72f32fbfeb9ec244b37efec7ee6805b,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 871785511094678181, guid: e72f32fbfeb9ec244b37efec7ee6805b,
+        type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 227e5031a21ffb44298f982be83f26b7, type: 3}
+    - target: {fileID: 871785511094678181, guid: e72f32fbfeb9ec244b37efec7ee6805b,
+        type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: CoinPickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 871785511094678181, guid: e72f32fbfeb9ec244b37efec7ee6805b,
+        type: 3}
+      propertyPath: sounds.Array.data[7].pitch
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 871785511094678181, guid: e72f32fbfeb9ec244b37efec7ee6805b,
+        type: 3}
+      propertyPath: sounds.Array.data[7].volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2936928760136283900, guid: e72f32fbfeb9ec244b37efec7ee6805b,
         type: 3}
       propertyPath: m_LocalPosition.x
