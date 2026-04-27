@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -27,6 +28,10 @@ public class PauseMenu : MonoBehaviour
 
     public static Action OnPause;
     public static Action OnResume;
+
+    [SerializeField] private InputActionReference move;
+    [SerializeField] private InputActionReference submit;
+    [SerializeField] private InputActionReference cancel;
     
     public bool IsPaused => paused;
 
@@ -46,9 +51,14 @@ public class PauseMenu : MonoBehaviour
         if (!PlayerInput.Instance.pausePressed) return;
 
         if (IsPaused)
+        {
             ResumeGame();
+        }
+
         else
+        {
             PauseGame();
+        }
     }
 
 
@@ -104,6 +114,7 @@ public class PauseMenu : MonoBehaviour
                 pausePanel.SetActive(true);
             OpenMainPage();
 
+            EnableControllerUI();
         }
     }
 
@@ -118,7 +129,7 @@ public class PauseMenu : MonoBehaviour
             if (pausePanel != null)
                 pausePanel.SetActive(false);
 
-            
+            DisableControllerUI();
         }
     }
 
@@ -137,6 +148,20 @@ public class PauseMenu : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Game quit");
+    }
+
+    public void EnableControllerUI()
+    {
+        move.action.Enable();
+        submit.action.Enable();
+        cancel.action.Enable();
+    }
+
+    public void DisableControllerUI()
+    {
+        move.action.Disable();
+        submit.action.Disable();
+        cancel.action.Disable();
     }
 }
 
