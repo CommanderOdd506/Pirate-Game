@@ -1191,6 +1191,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 332669806730885967, guid: 665417ac42b47f8479a32b428eb2a5bc,
+        type: 3}
+      propertyPath: islandName
+      value: Island2
+      objectReference: {fileID: 0}
+    - target: {fileID: 332669806730885967, guid: 665417ac42b47f8479a32b428eb2a5bc,
+        type: 3}
+      propertyPath: shipPartName
+      value: Rudder
+      objectReference: {fileID: 0}
     - target: {fileID: 6042092497315039415, guid: 665417ac42b47f8479a32b428eb2a5bc,
         type: 3}
       propertyPath: m_LocalPosition.x
