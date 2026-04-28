@@ -169,6 +169,7 @@ MonoBehaviour:
   pausePressed: 0
   horizontalBoatInputSmoothing: 10
   verticalBoatInputSmoothing: 1
+  horizontalBoatTurnStrength: 0.2
 --- !u!114 &74973695
 MonoBehaviour:
   m_ObjectHideFlags: 0

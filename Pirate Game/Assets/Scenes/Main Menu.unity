@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.4636, g: 0.50263995, b: 0.61, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 5c80d49013691df48ac94280337e88ce, type: 2}
   m_HaloStrength: 0.5
@@ -1607,9 +1607,11 @@ MonoBehaviour:
   firePressed: 0
   aimPressed: 0
   reloadPressed: 0
+  shootKey: 0
   pausePressed: 0
   horizontalBoatInputSmoothing: 10
   verticalBoatInputSmoothing: 10
+  horizontalBoatTurnStrength: 0.2
 --- !u!4 &1298445687
 Transform:
   m_ObjectHideFlags: 0
@@ -1953,12 +1955,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e07d0d2206966449e6f57b99620c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 1298445686}
   isPaused: 0
   slowEffect: 0.5
   isSlowed: 0
   transitionSpeed: 4
-  returnButton: {fileID: 162354109}
 --- !u!4 &1485972385
 Transform:
   m_ObjectHideFlags: 0
