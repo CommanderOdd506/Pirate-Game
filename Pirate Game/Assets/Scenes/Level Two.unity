@@ -9608,7 +9608,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _sunLight
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1284519189}
     - target: {fileID: 8806667431034490017, guid: d56123a0271c76241bb2c7c6253e8c15,
         type: 3}
       propertyPath: _moonLight
@@ -9689,6 +9689,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
+--- !u!108 &1284519189 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 8806667431035089771, guid: d56123a0271c76241bb2c7c6253e8c15,
+    type: 3}
+  m_PrefabInstance: {fileID: 1284519188}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1321375247
 GameObject:
   m_ObjectHideFlags: 0

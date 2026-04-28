@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4539270200371196339}
   - component: {fileID: 6956825715797451}
   - component: {fileID: 9109073828811207093}
+  - component: {fileID: 3026508177480218154}
   m_Layer: 6
   m_Name: Boulder1
   m_TagString: Untagged
@@ -115,7 +116,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5862718777072622120}
   serializedVersion: 4
-  m_Mass: 1e+9
+  m_Mass: 200
   m_Drag: 0.07
   m_AngularDrag: 0.03
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -149,3 +150,16 @@ MonoBehaviour:
   rend: {fileID: 3218540845555841536}
   normalMat: {fileID: 2100000, guid: 8ceac51bd1c4cd14884c2425109f0b78, type: 2}
   highlightMat: {fileID: 2100000, guid: 489e9042997b4fc438dc8fec23371936, type: 2}
+--- !u!114 &3026508177480218154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5862718777072622120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df170930252d301418fd8538dc9e2adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTimer: 45
