@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 600580694989009623}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.46250343, y: -0.6830001, z: 0.5319929}
-  m_LocalScale: {x: 0.65936345, y: 0.65936345, z: 0.65936345}
+  m_LocalPosition: {x: 0.46250343, y: -0.6830001, z: 0.451}
+  m_LocalScale: {x: 0.5806889, y: 0.5806889, z: 0.5806889}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2443741637182297766}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushDirection: {x: -1, y: 0, z: -1}
-  pushForce: 1000
+  pushForce: 10
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 1631507549385302029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalPosition: {x: 0, y: 0.012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -425,7 +425,7 @@ Transform:
   m_GameObject: {fileID: 2660917381070687016}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.65142167, y: 1.5625002, z: -7.1579194}
+  m_LocalPosition: {x: 0.65142155, y: 1.5625, z: -7.157917}
   m_LocalScale: {x: 0.625, y: 0.625, z: 0.625}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 4
+    m_MaxSpeed: 1.596659
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_XAxis:
     Value: -5.2
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 191.599
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -832,7 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushDirection: {x: 0, y: 0, z: 1}
-  pushForce: 650
+  pushForce: 10
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushDirection: {x: 1, y: 0, z: 0}
-  pushForce: 650
+  pushForce: 10
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushDirection: {x: -1, y: 0, z: 0}
-  pushForce: 650
+  pushForce: 10
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1594,6 +1594,7 @@ MonoBehaviour:
   pausePressed: 0
   horizontalBoatInputSmoothing: 10
   verticalBoatInputSmoothing: 10
+  horizontalBoatTurnStrength: 0.2
 --- !u!136 &1305996941446263384
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1688,8 +1689,8 @@ Transform:
   m_GameObject: {fileID: 4845406790419137415}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.41249752, y: -0.6830001, z: 0.5319929}
-  m_LocalScale: {x: 0.65936345, y: 0.65936345, z: 0.65936345}
+  m_LocalPosition: {x: -0.41249752, y: -0.6830001, z: 0.45099813}
+  m_LocalScale: {x: 0.5806889, y: 0.5806889, z: 0.5806889}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2443741637182297766}
@@ -1778,7 +1779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushDirection: {x: 1, y: 0, z: -1}
-  pushForce: 100
+  pushForce: 10
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2039,7 +2040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushDirection: {x: 1, y: 0, z: 1}
-  pushForce: 650
+  pushForce: 10
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2098,7 +2099,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7685470714576071348}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.039117664, y: -0.036608864, z: 0.0014341142, w: 0.99856275}
+  m_LocalRotation: {x: 0.039117668, y: -0.036608864, z: 0.0014341143, w: 0.99856275}
   m_LocalPosition: {x: 0.3888178, y: 1.5943646, z: -5.295677}
   m_LocalScale: {x: 0.625, y: 0.625, z: 0.625}
   m_ConstrainProportionsScale: 0
@@ -2362,7 +2363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushDirection: {x: -1, y: 0, z: 1}
-  pushForce: 650
+  pushForce: 10
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2472,8 +2473,8 @@ Transform:
   m_GameObject: {fileID: 8916572813990083081}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0050640106, y: -0.6830001, z: 0.657}
-  m_LocalScale: {x: 0.65936345, y: 0.65936345, z: 0.65936345}
+  m_LocalPosition: {x: 0.0050640106, y: -0.6830001, z: 0.5759949}
+  m_LocalScale: {x: 0.5806889, y: 0.5806889, z: 0.5806889}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2443741637182297766}
@@ -2562,7 +2563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushDirection: {x: 0, y: 0, z: -1}
-  pushForce: 1250
+  pushForce: 10
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8

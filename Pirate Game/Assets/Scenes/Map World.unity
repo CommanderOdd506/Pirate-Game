@@ -497,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneHandler: {fileID: 1974605593}
+  islandName: Level Three
 --- !u!54 &215425180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -749,6 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneHandler: {fileID: 1974605593}
+  islandName: Level Two
 --- !u!54 &273378365
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -896,6 +898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneHandler: {fileID: 1974605593}
+  islandName: Level One
 --- !u!54 &354154226
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1222,6 +1225,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974d061530f48714891bbe888a626831, type: 3}
+--- !u!114 &529789532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8289156868334786147, guid: 974d061530f48714891bbe888a626831,
+    type: 3}
+  m_PrefabInstance: {fileID: 529789531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e07d0d2206966449e6f57b99620c11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &538312262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,6 +2414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneHandler: {fileID: 1974605593}
+  islandName: Hub World
 --- !u!54 &1498179937
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3344,7 +3360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0428c84e4c222224eaa91a3877321d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeManager: {fileID: 0}
+  timeManager: {fileID: 529789532}
 --- !u!4 &1974605594
 Transform:
   m_ObjectHideFlags: 0

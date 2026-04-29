@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class StasisRigidbody : MonoBehaviour,IStasisable
+public class StasisRigidbody : MonoBehaviour, IStasisable
 {
     [SerializeField] Renderer rend;
     [SerializeField] Material normalMat;
     [SerializeField] Material highlightMat;
+    [SerializeField] Material outlineMat;
     private Rigidbody rb;
     private bool isStasised = false;
 
@@ -29,15 +29,36 @@ public class StasisRigidbody : MonoBehaviour,IStasisable
             CheckpointManager.Instance.RespawnPlayer();
 
     }
+
+    void AddOutline()
+    {
+        var mats = new List<Material>(rend.materials);
+        bool alreadyHasOutline = mats.Exists(m => m.name.Contains(outlineMat.name));
+        if (!alreadyHasOutline)
+        {
+            mats.Add(outlineMat);
+            rend.materials = mats.ToArray();
+        }
+    }
+
+    void RemoveOutline()
+    {
+        var mats = new List<Material>(rend.materials);
+        mats.RemoveAll(m => m.name.Contains(outlineMat.name));
+        rend.materials = mats.ToArray();
+    }
+
     public void BeginStasis()
     {
         rb.isKinematic = true;
         isStasised = true;
-    } 
+        AddOutline();
+    }
     public void EndStasis()
     {
         rb.isKinematic = false;
-        isStasised = false;  
+        isStasised = false;
+        RemoveOutline();
     }
     public void OnStasisTargeted() => rend.material = highlightMat;
     public void OnStasisUntargeted() => rend.material = normalMat;

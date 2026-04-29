@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9109073828811207093}
   - component: {fileID: 3026508177480218154}
   m_Layer: 6
-  m_Name: Boulder1
+  m_Name: Boulder Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,8 +117,8 @@ Rigidbody:
   m_GameObject: {fileID: 5862718777072622120}
   serializedVersion: 4
   m_Mass: 200
-  m_Drag: 0.07
-  m_AngularDrag: 0.03
+  m_Drag: 0.04
+  m_AngularDrag: 0.02
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

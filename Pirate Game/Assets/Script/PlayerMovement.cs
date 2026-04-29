@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -34,10 +32,10 @@ public class PlayerMovement : MonoBehaviour
     public float rollSpeed = 8f;
     public float rollDuration = 0.6f;
     public float rollCooldown = 1f;
-    public float rollCrouchHeight = 0.5f;   // hitbox height while rolling
-    public float rollCrouchCenter = 0.25f;  // center.y offset while rolling
+    public float rollCrouchHeight = 0.5f;
+    public float rollCrouchCenter = 0.25f;
 
-    //properties
+    // Properties
     public bool IsGrounded => isGrounded;
     public bool IsSprinting => isSprinting;
     public bool IsDashing => isDashing;
@@ -48,12 +46,12 @@ public class PlayerMovement : MonoBehaviour
     public bool IsMoving => HasMovementInput && isGrounded && !isDashing && !isRolling;
     public float CurrentHorizontalSpeed => _currentSpeed;
 
-    //Events
+    // Events
     public static Action OnJump;
     public static Action OnDash;
     public static Action OnRoll;
 
-    //runtime
+    // Runtime
     private PlayerInput input;
     private Vector3 _velocity;
     private float _currentSpeed;
@@ -76,7 +74,11 @@ public class PlayerMovement : MonoBehaviour
     private float _defaultHeight;
     private Vector3 _defaultCenter;
     private bool isAlive = true;
+
+    // Slope push — raw accumulator reset each frame, smoothed value persists
     private Vector3 _slopePush;
+    private Vector3 _slopePushSmoothed;
+    private Vector3 _slopePushVelocity;
 
     void OnEnable()
     {
@@ -129,6 +131,8 @@ public class PlayerMovement : MonoBehaviour
         currentPlatform = platform;
     }
 
+    // Called by SlopeBlockerTrigger each frame it is active.
+    // No Time.deltaTime here — PlayerMovement applies deltaTime once during Move.
     public void AddSlopePush(Vector3 push)
     {
         _slopePush += push;
@@ -136,8 +140,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Normalize forward and right vectors to remove vertical direction and properly scale horizontal
-        //use cam as a the direction reference for 3d platformer environment 
+        // Normalize forward and right vectors to remove vertical direction and
+        // properly scale horizontal. Use cam as direction reference.
         Vector3 camForward = camera.forward;
         camForward.y = 0f;
         camForward.Normalize();
@@ -150,7 +154,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = Vector2.zero;
         bool sprintHeld = false;
         bool jumpPressed = false;
-        //Collect Input
+
+        // Collect input
         if (isAlive)
         {
             move = input.move;
@@ -158,45 +163,39 @@ public class PlayerMovement : MonoBehaviour
             jumpPressed = input.jumpPressed;
         }
 
-        //timers 
+        // Timers
         if (jumpPressed) _timeSinceJumpPressed = 0f; else _timeSinceJumpPressed += Time.deltaTime;
-
         if (isGrounded) _timeSinceLeftGround = 0f; else _timeSinceLeftGround += Time.deltaTime;
 
-        // cooldown timers
+        // Cooldown timers
         dashCooldownTimer -= Time.deltaTime;
         rollCooldownTimer -= Time.deltaTime;
 
         if (isGrounded && !canDoubleJump)
-        {
             canDoubleJump = true;
-        }
 
         if (isGrounded && hasDashed)
-        {
             hasDashed = false;
-        }
 
-        //horizontal move
-
+        // Horizontal move direction
         Vector3 moveDir = camForward * move.y + camRight * move.x;
         if (moveDir.sqrMagnitude > 1f) moveDir.Normalize();
         Vector3 horizontal = new Vector3();
 
-        // DASH
+        // Dash
         if (input.dashPressed && dashCooldownTimer <= 0f && !isDashing && !isRolling && !isGrounded && !hasDashed)
         {
             StartDash(moveDir);
             hasDashed = true;
         }
 
-        // ROLL
+        // Roll
         if (input.rollPressed && rollCooldownTimer <= 0f && !isRolling && !isDashing)
         {
             StartRoll(moveDir);
         }
 
-        //horizontal move vector and dash-roll implementation
+        // Horizontal move vector and dash/roll implementation
         if (isDashing)
         {
             dashTimer -= Time.deltaTime;
@@ -222,21 +221,20 @@ public class PlayerMovement : MonoBehaviour
             horizontal = moveDir * _currentSpeed;
         }
 
-        //sprint check
+        // Sprint check
         isSprinting = sprintHeld && moveDir.magnitude > 0.1f;
 
         float targetSpeed = isSprinting && canSprint ? sprintSpeed : walkSpeed;
         targetSpeed *= Mathf.Clamp01(move.magnitude);
 
-        //apply speed
+        // Apply speed
         _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, 10 * Time.deltaTime);
 
-        //JUMP
-
-        //timer check bools 
+        // Jump — timer check bools
         bool usingAbilities = isRolling || isDashing;
         bool canCoyoteJump = _timeSinceLeftGround <= coyoteTime;
         bool bufferedJump = _timeSinceJumpPressed <= jumpBuffer;
+
         if (bufferedJump && (isGrounded || canCoyoteJump) && !usingAbilities)
         {
             _timeSinceJumpPressed = jumpBuffer + 1f;
@@ -254,35 +252,39 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && _velocity.y < 0f) _velocity.y = groundStickForce;
         else _velocity.y += gravity * Time.deltaTime;
 
-        //rotate towards move direction
+        // Rotate towards move direction
         if (moveDir.sqrMagnitude > 0.01f && !isDashing && !isRolling)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        //cancel gravity
+        // Cancel gravity during dash
         if (isDashing)
-        {
             _velocity.y = 0;
-        }
 
-        // Apply platform movement FIRST
+        // Apply platform movement first
         if (currentPlatform != null)
-        {
             controller.Move(currentPlatform.velocity * Time.deltaTime);
-        }
 
-        // combine player motion with accumulated slope push then reset
-        Vector3 motion = horizontal + new Vector3(0f, _velocity.y, 0f) + _slopePush;
+        // Smooth the slope push to eliminate jitter when entering/exiting triggers.
+        // _slopePush is the raw target set this frame; _slopePushSmoothed eases toward it.
+        _slopePushSmoothed = Vector3.SmoothDamp(
+            _slopePushSmoothed,
+            _slopePush,
+            ref _slopePushVelocity,
+            0.08f
+        );
+
+        // Combine player motion — deltaTime applied once here for everything
+        Vector3 motion = horizontal + new Vector3(0f, _velocity.y, 0f) + _slopePushSmoothed;
         controller.Move(motion * Time.deltaTime);
+
+        // Reset raw accumulator — SlopeBlockerTrigger will re-fill it next frame if still touching
         _slopePush = Vector3.zero;
     }
 
-
-
-    //ABILITIES
-
+    // ── Abilities ────────────────────────────────────────────────────────────
 
     void StartDash(Vector3 moveDir)
     {

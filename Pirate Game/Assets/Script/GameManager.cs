@@ -38,6 +38,18 @@ public static class GameManager
         return PlayerPrefs.GetString(LAST_ISLAND_KEY, DEFAULT_SPAWN);
     }
 
+    public static void VisitedHub()
+    {
+        PlayerPrefs.SetInt("HubVisited", 1);
+        PlayerPrefs.Save();
+    }
+
+
+    public static bool HasVisitedHub()
+    {
+        return PlayerPrefs.HasKey("HubVisited");
+    }
+
 
     // ---------------------------------------------------------------
     //  SHIP PARTS  (collected once per level, permanent)
@@ -57,7 +69,6 @@ public static class GameManager
     {
         return PlayerPrefs.GetInt(SHIP_PART_PREFIX + partName, 0) == 1;
     }
-
 
     // ---------------------------------------------------------------
     //  DEBUG UTILITY

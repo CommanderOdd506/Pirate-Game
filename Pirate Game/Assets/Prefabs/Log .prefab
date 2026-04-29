@@ -109,7 +109,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -18.7, y: 1.98, z: 63.3}
-  m_LocalScale: {x: 4.19323, y: 6.8318467, z: 4.19323}
+  m_LocalScale: {x: 3.6372917, y: 5.9260807, z: 3.6372917}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5122630384156150426}
@@ -208,6 +208,7 @@ MonoBehaviour:
   rend: {fileID: 3409022580374555375}
   normalMat: {fileID: 2100000, guid: 30835f6dceb7ea544aef20e8bbfba8c7, type: 2}
   highlightMat: {fileID: 2100000, guid: 489e9042997b4fc438dc8fec23371936, type: 2}
+  outlineMat: {fileID: 2100000, guid: fc32acee5b69fca45a48093b0234f174, type: 2}
   isStasised: 0
 --- !u!1001 &4075425989493020267
 PrefabInstance:
