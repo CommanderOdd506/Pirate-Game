@@ -9,22 +9,23 @@ public static class GameManager
     // ---------------------------------------------------------------
     //  KEYS
     // ---------------------------------------------------------------
-
-    // Stores the island name the player just left (e.g. "CannonIsland")
     private const string LAST_ISLAND_KEY = "LastIsland";
-
-    // Each ship part is stored as "ShipPart_<partName>" with value 0 or 1
     private const string SHIP_PART_PREFIX = "ShipPart_";
+    private const string HUB_VISITED_KEY = "HubVisited";
 
-    // The default spawn point on the map if no island has been visited yet
     public const string DEFAULT_SPAWN = "HubIsland";
 
+    // All known ship part names — add new parts here as your game grows.
+    // ResetGameData uses this list to know exactly what to wipe.
+    private static readonly string[] SHIP_PART_NAMES =
+    {
+         "Mast", "Wheel", "Rudder"
+        // Add your actual part names here
+    };
 
     // ---------------------------------------------------------------
-    //  LAST ISLAND  (used by MapSpawner to pick spawn point)
+    //  LAST ISLAND
     // ---------------------------------------------------------------
-
-    /// <summary>Call this at the exit of every level scene.</summary>
     public static void SetLastIsland(string islandName)
     {
         PlayerPrefs.SetString(LAST_ISLAND_KEY, islandName);
@@ -32,49 +33,63 @@ public static class GameManager
         Debug.Log($"[GameManager] LastIsland saved: {islandName}");
     }
 
-    /// <summary>Returns the island name to spawn at, or DEFAULT_SPAWN if none saved.</summary>
     public static string GetLastIsland()
     {
         return PlayerPrefs.GetString(LAST_ISLAND_KEY, DEFAULT_SPAWN);
     }
 
+    // ---------------------------------------------------------------
+    //  HUB
+    // ---------------------------------------------------------------
     public static void VisitedHub()
     {
-        PlayerPrefs.SetInt("HubVisited", 1);
+        PlayerPrefs.SetInt(HUB_VISITED_KEY, 1);
         PlayerPrefs.Save();
     }
 
-
     public static bool HasVisitedHub()
     {
-        return PlayerPrefs.HasKey("HubVisited");
+        return PlayerPrefs.HasKey(HUB_VISITED_KEY);
     }
 
-
     // ---------------------------------------------------------------
-    //  SHIP PARTS  (collected once per level, permanent)
+    //  SHIP PARTS
     // ---------------------------------------------------------------
-
-    /// <summary>Mark a ship part as collected. Call this when the player receives the part.</summary>
     public static void CollectShipPart(string partName)
     {
-        string key = SHIP_PART_PREFIX + partName;
-        PlayerPrefs.SetInt(key, 1);
+        PlayerPrefs.SetInt(SHIP_PART_PREFIX + partName, 1);
         PlayerPrefs.Save();
         Debug.Log($"[GameManager] Ship part collected: {partName}");
     }
 
-    /// <summary>Returns true if the player has already collected this part.</summary>
     public static bool HasShipPart(string partName)
     {
         return PlayerPrefs.GetInt(SHIP_PART_PREFIX + partName, 0) == 1;
     }
 
     // ---------------------------------------------------------------
-    //  DEBUG UTILITY
+    //  DEBUG UTILITIES
     // ---------------------------------------------------------------
 
-    /// <summary>Wipes all game data — useful for testing in the editor.</summary>
+    /// <summary>
+    /// Wipes only game state data (island progress, ship parts, hub visit).
+    /// Settings stored in PlayerPrefs under other keys are left untouched.
+    /// </summary>
+    public static void ResetGameData()
+    {
+        PlayerPrefs.DeleteKey(LAST_ISLAND_KEY);
+        PlayerPrefs.DeleteKey(HUB_VISITED_KEY);
+
+        foreach (string part in SHIP_PART_NAMES)
+            PlayerPrefs.DeleteKey(SHIP_PART_PREFIX + part);
+
+        PlayerPrefs.Save();
+        Debug.Log("[GameManager] Game state reset. Settings preserved.");
+    }
+
+    /// <summary>
+    /// Wipes ALL PlayerPrefs including settings. Use with caution.
+    /// </summary>
     public static void ResetAllData()
     {
         PlayerPrefs.DeleteAll();

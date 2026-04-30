@@ -112,7 +112,7 @@ Material:
     - _EnvironmentReflections: 1
     - _Foam_Amount: 1.17
     - _Foam_Cutoff: 1
-    - _Foam_Scale: 35.57
+    - _Foam_Scale: 75.96
     - _Foam_Speed: 0.01
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -135,9 +135,9 @@ Material:
     - _Surface: 0
     - _Water_Depth: 0.07
     - _WaveSpeed: 0.05
-    - _Wave_Amplitude: 0.05
+    - _Wave_Amplitude: 0.24
     - _Wave_Frequency: 1.68
-    - _Wave_Speed: 2.22
+    - _Wave_Speed: 1.28
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
