@@ -70,7 +70,7 @@ public class PlayerInput : MonoBehaviour
         
 
         //disabling inputs based on scene, if it is any scene other than 4 (map scene) you are 3d and can use all abilities
-        if(currentScene.buildIndex != 5 && !PauseMenu.Instance.IsPaused)
+        if(currentScene.buildIndex != 5)
         {
             /*sprintHeld = Input.GetKey(KeyCode.LeftShift);
             interactPressed = Input.GetKeyDown(KeyCode.F);

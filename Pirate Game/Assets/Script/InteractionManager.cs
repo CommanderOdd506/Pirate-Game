@@ -40,7 +40,7 @@ public class InteractionManager : MonoBehaviour
             canInteract = true;
             currentInteractable = interactable;
 
-            promptUI.text = $"Press \"F\" to interact with {other.gameObject.name}";
+            promptUI.text = $"Press Interact";
         }
     }
 

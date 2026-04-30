@@ -26,7 +26,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Foam_Scale: 177.62
+    - _Foam_Scale: 0
     - _Foam_Speed: 0.001
     - _Wave_Amplitude: 0.001
     - _Wave_Frequency: 1

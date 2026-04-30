@@ -19,7 +19,7 @@ public static class GameManager
     // ResetGameData uses this list to know exactly what to wipe.
     private static readonly string[] SHIP_PART_NAMES =
     {
-         "Mast", "Wheel", "Rudder"
+        "Wheel", "Mast", "Rudder"
         // Add your actual part names here
     };
 

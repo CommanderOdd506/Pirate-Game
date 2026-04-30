@@ -123,6 +123,7 @@ MonoBehaviour:
   rend: {fileID: 875708620611701632}
   normalMat: {fileID: 2100000, guid: 0578a49bd2dbefa459be6f55bce33bc2, type: 2}
   highlightMat: {fileID: 2100000, guid: 489e9042997b4fc438dc8fec23371936, type: 2}
+  outlineMat: {fileID: 2100000, guid: fc32acee5b69fca45a48093b0234f174, type: 2}
 --- !u!54 &2301042754779485418
 Rigidbody:
   m_ObjectHideFlags: 0

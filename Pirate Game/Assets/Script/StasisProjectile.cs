@@ -8,6 +8,7 @@ public class StasisProjectile : MonoBehaviour, IStasisable
     [SerializeField] Renderer rend;
     [SerializeField] Material normalMat;
     [SerializeField] Material highlightMat;
+    [SerializeField] Material outlineMat;
 
     private bool isStasised = false;
 
@@ -28,14 +29,38 @@ public class StasisProjectile : MonoBehaviour, IStasisable
 
         Destroy(gameObject);
     }
+    void AddOutline()
+    {
+        var mats = new List<Material>(rend.materials);
+        bool alreadyHasOutline = mats.Exists(m => m.name.Contains(outlineMat.name));
+        if (!alreadyHasOutline)
+        {
+            mats.Add(outlineMat);
+            rend.materials = mats.ToArray();
+        }
+    }
 
+    void RemoveOutline()
+    {
+        var mats = new List<Material>(rend.materials);
+        mats.RemoveAll(m => m.name.Contains(outlineMat.name));
+        rend.materials = mats.ToArray();
+    }
     void OnDestroy()
     {
         OnDestroyed?.Invoke(this);
     }
 
-    public void BeginStasis() => isStasised = true;
-    public void EndStasis() => isStasised = false;
+    public void BeginStasis()
+    {
+        isStasised = true;
+        AddOutline();
+    }
+    public void EndStasis()
+    {
+        isStasised = false;
+        RemoveOutline();
+    }
     public void OnStasisTargeted() => rend.material = highlightMat;
     public void OnStasisUntargeted() => rend.material = normalMat;
 }
