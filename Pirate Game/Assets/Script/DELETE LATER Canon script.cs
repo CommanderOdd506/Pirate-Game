@@ -26,7 +26,12 @@ public class DELETELATERCanonscript : MonoBehaviour
     private Vector3 currentVelocity;
     private float gravity = -9.81f;
 
-    public GameObject playerModel; 
+    
+    public GameObject playerModel;
+
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private PlayerAnimationController animtionController;
+
 
     private void Start()
     {
@@ -110,6 +115,8 @@ public class DELETELATERCanonscript : MonoBehaviour
 
         controller.Move(currentVelocity * Time.deltaTime);
 
+        playerAnimator.SetBool("IsGrounded", false);
+
         if (controller.isGrounded && currentVelocity.y <= 0)
         {
             isFlying = false;
@@ -157,6 +164,9 @@ public class DELETELATERCanonscript : MonoBehaviour
     {
         if (playerMovement != null)
             playerMovement.enabled = enabled;
+
+        if (animtionController)
+            animtionController.enabled = enabled;
     }
 
     private void OnTriggerEnter(Collider other)

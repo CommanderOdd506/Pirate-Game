@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.60598993, g: 0.6572761, b: 0.78699994, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.82
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 5c80d49013691df48ac94280337e88ce, type: 2}
   m_HaloStrength: 0.5
@@ -498,6 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneHandler: {fileID: 1974605593}
   islandName: Level Three
+  isHub: 1
 --- !u!54 &215425180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -751,6 +752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneHandler: {fileID: 1974605593}
   islandName: Level Two
+  isHub: 1
 --- !u!54 &273378365
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -899,6 +901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneHandler: {fileID: 1974605593}
   islandName: Level One
+  isHub: 1
 --- !u!54 &354154226
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2415,6 +2418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneHandler: {fileID: 1974605593}
   islandName: Hub World
+  isHub: 1
 --- !u!54 &1498179937
 Rigidbody:
   m_ObjectHideFlags: 0
