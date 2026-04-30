@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9109073828811207093}
   - component: {fileID: 3026508177480218154}
   m_Layer: 6
-  m_Name: Boulder Top
+  m_Name: BoulderObst1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 200
   m_Drag: 0.04
-  m_AngularDrag: 0.02
+  m_AngularDrag: 0.03
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -163,4 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df170930252d301418fd8538dc9e2adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayTimer: 30
+  delayTimer: 45
