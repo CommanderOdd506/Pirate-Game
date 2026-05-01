@@ -16,11 +16,16 @@ public class MapSpawner : MonoBehaviour
     public SpawnPoint[] spawnPoints;
     public Transform player;
 
+    private CharacterController characterController;
+
 
     private void Start()
     {
         string targetIsland = GameManager.GetLastIsland();
+        characterController = player.gameObject.GetComponent<CharacterController>();
         TeleportToIsland(targetIsland);
+
+        
     }
 
     private void TeleportToIsland(string islandName)
@@ -29,8 +34,10 @@ public class MapSpawner : MonoBehaviour
         {
             if (sp.islandName == islandName && sp.spawnTransform != null)
             {
+                characterController.enabled = false;
                 player.position = sp.spawnTransform.position;
                 player.rotation = sp.spawnTransform.rotation;
+                characterController.enabled = true;
                 Debug.Log($"[MapSpawner] Spawned at: {islandName}");
                 return;
             }

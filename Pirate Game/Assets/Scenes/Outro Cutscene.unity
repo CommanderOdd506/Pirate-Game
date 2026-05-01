@@ -3102,6 +3102,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3925175550464679468, guid: 5f9898b94d0c31b4c87476cde6e4318f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6174210045337571537, guid: 5f9898b94d0c31b4c87476cde6e4318f,
         type: 3}
       propertyPath: m_IsActive
@@ -6982,6 +6987,7 @@ MonoBehaviour:
     m_Bits: 64
   sphereCastRange: 30
   stasisTimer: 5
+  stasisCooldownTimer: 1.5
   playerInput: {fileID: 1642753365622659579}
   standardPost: {fileID: 3993892803117952783}
   stasisPost: {fileID: 6197162389941754891}
