@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class PlayerStasisManager : MonoBehaviour
 {
     [SerializeField] LayerMask stasisLayer;
     [SerializeField] float sphereCastRange;
     [SerializeField] float stasisTimer = 5;
+    [SerializeField] private float stasisCooldownTimer = 1.5f;
 
     [SerializeField] private PlayerInput playerInput;
 
@@ -23,10 +23,10 @@ public class PlayerStasisManager : MonoBehaviour
     private Camera cam;
     IStasisable stasisObject = null;
 
+    private bool stasisRecharged = true;
+
     IStasisable stasisedObject = null;
     Coroutine stasisCoroutine;
-
-    
 
     void Awake()
     {
@@ -35,7 +35,6 @@ public class PlayerStasisManager : MonoBehaviour
         stasisReticle.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (playerInput.stasisSearchPressed && !PauseMenu.Instance.IsPaused)
@@ -49,10 +48,9 @@ public class PlayerStasisManager : MonoBehaviour
             SetPostProcessing(false);
             stasisReticle.gameObject.SetActive(false);
         }
+
         if (playerInput.stasisActivatePressed && bestTarget != null)
-        {
             StartStasis();
-        }
 
         if (!playerInput.stasisSearchPressed && previousTarget != null)
         {
@@ -60,8 +58,6 @@ public class PlayerStasisManager : MonoBehaviour
             previousTarget = null;
             bestTarget = null;
         }
-        //use find stasis target if input 
-        //then use otheer input to activate stasis 
     }
 
     void SetPostProcessing(bool spp)
@@ -76,7 +72,6 @@ public class PlayerStasisManager : MonoBehaviour
             standardPost.SetActive(true);
             stasisPost.SetActive(false);
         }
-        return;
     }
 
     void FindStasisTarget()
@@ -104,12 +99,12 @@ public class PlayerStasisManager : MonoBehaviour
             if (previousTarget != null)
             {
                 previousTarget.OnStasisUntargeted();
-                previousTarget.OnDestroyed -= HandleTargetDestroyed; // unsubscribe old
+                previousTarget.OnDestroyed -= HandleTargetDestroyed;
             }
             if (bestTarget != null)
             {
                 bestTarget.OnStasisTargeted();
-                bestTarget.OnDestroyed += HandleTargetDestroyed; // subscribe new
+                bestTarget.OnDestroyed += HandleTargetDestroyed;
             }
             previousTarget = bestTarget;
         }
@@ -117,14 +112,22 @@ public class PlayerStasisManager : MonoBehaviour
 
     void StartStasis()
     {
-        if (stasisedObject != null)
+        if (!stasisRecharged) return;
+
+        // Only end stasis on the previous object if it's a DIFFERENT target
+        if (stasisedObject != null && stasisedObject != bestTarget)
         {
             stasisedObject.EndStasis();
             stasisedObject.OnDestroyed -= HandleStasisedDestroyed;
+            stasisedObject = null;
         }
 
         if (stasisCoroutine != null)
             StopCoroutine(stasisCoroutine);
+
+        SFXManager.instance.AudioPlayOneShot("Stasis");
+        stasisRecharged = false;
+        StartCoroutine(StasisCooldown());
 
         bestTarget.BeginStasis();
         stasisedObject = bestTarget;
@@ -146,7 +149,6 @@ public class PlayerStasisManager : MonoBehaviour
     private void HandleTargetDestroyed(IStasisable destroyed)
     {
         destroyed.OnDestroyed -= HandleTargetDestroyed;
-
         if (bestTarget == destroyed) bestTarget = null;
         if (previousTarget == destroyed) previousTarget = null;
     }
@@ -154,8 +156,6 @@ public class PlayerStasisManager : MonoBehaviour
     private void HandleStasisedDestroyed(IStasisable destroyed)
     {
         destroyed.OnDestroyed -= HandleStasisedDestroyed;
-
-        // Object is already gone so skip EndStasis(), just clean up our side
         if (stasisCoroutine != null)
         {
             StopCoroutine(stasisCoroutine);
@@ -164,6 +164,11 @@ public class PlayerStasisManager : MonoBehaviour
         stasisedObject = null;
     }
 
+    private IEnumerator StasisCooldown()
+    {
+        yield return new WaitForSeconds(stasisCooldownTimer);
+        stasisRecharged = true;
+    }
 
     private IEnumerator StasisTimer()
     {
@@ -174,7 +179,6 @@ public class PlayerStasisManager : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-
-       Gizmos.DrawWireSphere(transform.position, sphereCastRange);
+        Gizmos.DrawWireSphere(transform.position, sphereCastRange);
     }
 }

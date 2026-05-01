@@ -17,7 +17,14 @@ public class TutorialUI : MonoBehaviour
         Instance = this;
         InputSystem.onActionChange += OnActionChange;
     }
-
+    void Start()
+    {
+        bool visited = GameManager.HasVisitedHub();
+        if (visited)
+        {
+            Destroy(this.gameObject);
+        }
+    }
     private void OnDestroy()
     {
         InputSystem.onActionChange -= OnActionChange;

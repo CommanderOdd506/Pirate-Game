@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
+using UnityEngine.EventSystems;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ScoreManager : MonoBehaviour
     public CinemachineFreeLook freeLookCam;
     public PlayerInput playerInput;
     public PlayerMovement playerMovement;
+    public GameObject resumeButton;
 
     [SerializeField] TextMeshProUGUI timerText;
 
@@ -75,6 +77,7 @@ public class ScoreManager : MonoBehaviour
         timerTextEndScreen.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         deathsTextEndScreen.text = CheckpointManager.Instance.Deaths.ToString();
         totalScoreTextEndScreen.text = CalculateScore().ToString();
+        EventSystem.current.SetSelectedGameObject(resumeButton);
     }
     // Update is called once per frame
     void Update()

@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: gold
   value: 1
+  audioName: Coin
 --- !u!95 &4236784228986600073
 Animator:
   serializedVersion: 5

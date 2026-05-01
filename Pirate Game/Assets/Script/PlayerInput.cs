@@ -67,10 +67,10 @@ public class PlayerInput : MonoBehaviour
     {
         if (!canInput)
             return;
-        
+
 
         //disabling inputs based on scene, if it is any scene other than 4 (map scene) you are 3d and can use all abilities
-        if(currentScene.buildIndex != 5)
+        if (currentScene.buildIndex != 5 && !PauseMenu.Instance.IsPaused)
         {
             /*sprintHeld = Input.GetKey(KeyCode.LeftShift);
             interactPressed = Input.GetKeyDown(KeyCode.F);
@@ -101,7 +101,7 @@ public class PlayerInput : MonoBehaviour
             if (move.sqrMagnitude > 1f) move.Normalize();
         }
         //if you are in map scene, you can only interact and pause as well as move
-        else
+        else if  (!PauseMenu.Instance.IsPaused)
         {
             interactPressed = controls.Gameplay.Interact.WasPressedThisFrame();
             pausePressed = controls.Gameplay.Pause.WasPressedThisFrame();
@@ -126,6 +126,10 @@ public class PlayerInput : MonoBehaviour
                     Mathf.Lerp(move.y, 0, verticalBoatInputSmoothing * Time.deltaTime)
                 );
             }
+        }
+        else
+        {
+            pausePressed = controls.Gameplay.Pause.WasPressedThisFrame();
         }
 
 

@@ -65,7 +65,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Jump
     clip: {fileID: 8300000, guid: 1e56f3439ed4be445894aacab63552f8, type: 3}
-    volume: 0.99
+    volume: 0.733
     pitch: 1.25
     loop: 0
     source: {fileID: 0}
@@ -81,10 +81,16 @@ MonoBehaviour:
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
-  - name: CoinPickup
-    clip: {fileID: 8300000, guid: 227e5031a21ffb44298f982be83f26b7, type: 3}
-    volume: 1
-    pitch: 1.1
+  - name: Coin
+    clip: {fileID: 8300000, guid: b8d7fe5af2179e94d9992cbe2f4f67c8, type: 3}
+    volume: 0.248
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+  - name: Stasis
+    clip: {fileID: 8300000, guid: a64dc7b031383194796c7d260595443f, type: 3}
+    volume: 0.317
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   mainAudioMixer: {fileID: 24300002, guid: fec468908cd818845af88f9b52f3fa6d, type: 2}
