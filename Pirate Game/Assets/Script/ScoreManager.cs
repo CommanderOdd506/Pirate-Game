@@ -49,6 +49,11 @@ public class ScoreManager : MonoBehaviour
     {
         int newScore = 0;
         newScore += CollectibleSystem.Instance.Get("gold");
+        newScore -= CheckpointManager.Instance.Deaths;
+        if (newScore <= 0)
+        {
+            newScore = 0;
+        }
         return newScore;
     }
 
@@ -75,7 +80,7 @@ public class ScoreManager : MonoBehaviour
         timerText.gameObject.SetActive(false);
         coinsTextEndScreen.text = CollectibleSystem.Instance.Get("gold").ToString();
         timerTextEndScreen.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        deathsTextEndScreen.text = CheckpointManager.Instance.Deaths.ToString();
+        deathsTextEndScreen.text = "- " + CheckpointManager.Instance.Deaths.ToString();
         totalScoreTextEndScreen.text = CalculateScore().ToString();
         EventSystem.current.SetSelectedGameObject(resumeButton);
     }

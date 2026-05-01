@@ -93,4 +93,10 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Cannon
+    clip: {fileID: 8300000, guid: 75c2c00b9c161ae4e8c0fe1e53b7fad7, type: 3}
+    volume: 0.297
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   mainAudioMixer: {fileID: 24300002, guid: fec468908cd818845af88f9b52f3fa6d, type: 2}
