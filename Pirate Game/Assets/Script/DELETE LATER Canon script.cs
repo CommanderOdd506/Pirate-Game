@@ -106,6 +106,8 @@ public class DELETELATERCanonscript : MonoBehaviour
 
         currentVelocity = CalculateLaunchVelocity();
 
+        SFXManager.instance.AudioPlayOneShot("Cannon");
+
         line.enabled = false;
     }
 

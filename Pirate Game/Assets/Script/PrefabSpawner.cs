@@ -10,6 +10,9 @@ public class PrefabSpawner : MonoBehaviour
     [SerializeField] private float loopTime = 3.0f;
     [SerializeField] private float startDelay = 0f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
 
     [Header ("Random")]
     [SerializeField] private bool randomSpawn;
@@ -71,5 +74,9 @@ public class PrefabSpawner : MonoBehaviour
         if (spawmObj == null) return;
 
         Instantiate(spawmObj, transform.position, transform.rotation);
+        if ((audioClip != null) && (audioSource != null))
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
     }
 }

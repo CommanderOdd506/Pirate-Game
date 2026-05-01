@@ -5,11 +5,18 @@ public class HubSpawner : MonoBehaviour
 
     public Transform player;
     public Transform visitedSpawn;
+    public Checkpoint startingCheckpoint;
+    public GameObject tutorialObject;
 
     private void Start()
     {
         bool visited = GameManager.HasVisitedHub();
-        if (visited) Teleport();
+        if (visited)
+        {
+            Teleport();
+            CheckpointManager.Instance.SetCheckpoint(startingCheckpoint);
+            tutorialObject.SetActive(false);
+        }
     }
 
     private void Teleport()

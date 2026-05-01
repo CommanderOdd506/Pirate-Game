@@ -30,12 +30,12 @@ public class CheckpointManager : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
+        if (startingCheckpoint) { SetCheckpoint(startingCheckpoint); }
     }
 
     private void Start()
     {
         deaths = 0;
-        if (startingCheckpoint) { SetCheckpoint(startingCheckpoint); }
     }
     /// <summary>
     /// Called by a Checkpoint when the player enters it.
