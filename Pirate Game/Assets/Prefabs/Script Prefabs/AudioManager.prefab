@@ -66,7 +66,7 @@ MonoBehaviour:
   - name: Jump
     clip: {fileID: 8300000, guid: 1e56f3439ed4be445894aacab63552f8, type: 3}
     volume: 0.733
-    pitch: 1.25
+    pitch: 1.2
     loop: 0
     source: {fileID: 0}
   - name: Dash
@@ -89,7 +89,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Stasis
     clip: {fileID: 8300000, guid: a64dc7b031383194796c7d260595443f, type: 3}
-    volume: 0.317
+    volume: 0.663
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -97,6 +97,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 75c2c00b9c161ae4e8c0fe1e53b7fad7, type: 3}
     volume: 0.297
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Die
+    clip: {fileID: 8300000, guid: 0f8a40f10f306f94f8a05d2c01b4e2ac, type: 3}
+    volume: 0.296
+    pitch: 1.14
     loop: 0
     source: {fileID: 0}
   mainAudioMixer: {fileID: 24300002, guid: fec468908cd818845af88f9b52f3fa6d, type: 2}

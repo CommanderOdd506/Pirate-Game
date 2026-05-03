@@ -53,4 +53,12 @@ public class AnimationAudio : MonoBehaviour
             SFXManager.instance.AudioPlay("Roll");
         }
     }
+
+    public void PlayDeathAudio()
+    {
+        if (SFXManager.instance)
+        {
+            SFXManager.instance.AudioPlay("Die");
+        }
+    }
 }
