@@ -9,10 +9,6 @@ public class BoulderAudio : MonoBehaviour
 
     void Update()
     {
-        if(this.isStasised == true)
-        {
-            Debug.Log("Cool");
-        }
     }
 
     void OnTriggerEnter(Collider other)
