@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     public PlayerInput playerInput;
     public PlayerMovement playerMovement;
     public GameObject resumeButton;
+    public GameObject music;
 
     [SerializeField] TextMeshProUGUI timerText;
 
@@ -67,6 +68,8 @@ public class ScoreManager : MonoBehaviour
     void PlayerWinEffects()
     {
          playerAnimator.SetTrigger("Win");
+         SFXManager.instance.AudioPlay("Victory");
+        music.SetActive(false); 
          playerInput.enabled = false;
          playerMovement.enabled = false;
          Cursor.lockState = CursorLockMode.None;

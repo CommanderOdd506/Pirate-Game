@@ -111,4 +111,10 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Victory
+    clip: {fileID: 8300000, guid: 16a18ad755d343040be3a7f97975b44b, type: 3}
+    volume: 0.598
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   mainAudioMixer: {fileID: 24300002, guid: fec468908cd818845af88f9b52f3fa6d, type: 2}
