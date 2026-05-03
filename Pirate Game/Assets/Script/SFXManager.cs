@@ -127,6 +127,15 @@ public class SFXManager : MonoBehaviour
         t.source.Stop();
         t.source.PlayOneShot(t.clip);
     }
+    public void AudioPlayOneShot(string name, float volume)
+    {
+        SoundLibrary t = GetSound(name);
+
+        if (t == null)
+            return;
+        t.source.Stop();
+        t.source.PlayOneShot(t.clip, volume);
+    }
 
     public void AudioStop(string name)
     {

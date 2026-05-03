@@ -105,4 +105,10 @@ MonoBehaviour:
     pitch: 1.14
     loop: 0
     source: {fileID: 0}
+  - name: Chest
+    clip: {fileID: 8300000, guid: 410f32d6dc7690f44b72b093dac2779a, type: 3}
+    volume: 2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   mainAudioMixer: {fileID: 24300002, guid: fec468908cd818845af88f9b52f3fa6d, type: 2}

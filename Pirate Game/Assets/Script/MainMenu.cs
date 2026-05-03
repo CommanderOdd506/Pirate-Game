@@ -12,8 +12,10 @@ public class MainMenu : MonoBehaviour
 
     public GameObject controlsPage;
     public GameObject MainPage;
+    public GameObject creditsPage;
 
     public GameObject returnButton;
+    public GameObject returnButtonCredits;
 
     // Start is called before the first frame update
     void Start()
@@ -34,9 +36,22 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(returnButton);
     }
 
+    public void CreditsButton()
+    {
+        MainPage.SetActive(false);
+
+        gameImage.SetActive(false);
+
+        creditsPage.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(returnButtonCredits);
+    }
+
     public void ReturnToMain()
     {
         controlsPage.SetActive(false);
+
+        creditsPage.SetActive(false);
 
         gameImage.SetActive(true);
 
