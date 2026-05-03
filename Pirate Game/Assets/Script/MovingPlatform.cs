@@ -17,6 +17,8 @@ public class MovingPlatform : MonoBehaviour, IStasisable
     public bool isStasised = false;
     public event System.Action<IStasisable> OnDestroyed;
 
+    [SerializeField] private ParticleSystem stasisVFX;
+
     void Start()
     {
         if (points == null || points.Length < 2)
@@ -84,6 +86,7 @@ public class MovingPlatform : MonoBehaviour, IStasisable
     public void BeginStasis()
     {
         isStasised = true;
+        stasisVFX?.Play();
         AddOutline();
     }
 

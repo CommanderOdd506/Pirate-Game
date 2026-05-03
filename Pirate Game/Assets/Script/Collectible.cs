@@ -7,6 +7,10 @@ public class Collectible : MonoBehaviour
     public string id;
     public int value = 1;
     public string audioName;
+    [SerializeField] private ParticleSystem coinVFX;
+    [SerializeField] private CapsuleCollider collider;
+    [SerializeField] private GameObject mesh;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,6 +22,8 @@ public class Collectible : MonoBehaviour
         }
 
         CollectibleSystem.Instance.Add(id, value);
-        this.gameObject.SetActive(false);
+        mesh?.SetActive(false);
+        collider.enabled = false;
+        coinVFX?.Play();
     }
 }

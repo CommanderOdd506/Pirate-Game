@@ -9,7 +9,7 @@ public class StasisProjectile : MonoBehaviour, IStasisable
     [SerializeField] Material normalMat;
     [SerializeField] Material highlightMat;
     [SerializeField] Material outlineMat;
-
+    [SerializeField] private ParticleSystem stasisVFX;
     private bool isStasised = false;
 
     public event System.Action<IStasisable> OnDestroyed;
@@ -54,6 +54,7 @@ public class StasisProjectile : MonoBehaviour, IStasisable
     public void BeginStasis()
     {
         isStasised = true;
+        stasisVFX?.Play();
         AddOutline();
     }
     public void EndStasis()

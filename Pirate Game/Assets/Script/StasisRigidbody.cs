@@ -11,6 +11,10 @@ public class StasisRigidbody : MonoBehaviour, IStasisable
     private Rigidbody rb;
     private bool isStasised = false;
 
+    public bool IsStasised => isStasised;
+
+    [SerializeField] private ParticleSystem stasisVFX;
+
     public event System.Action<IStasisable> OnDestroyed;
 
     void Awake()
@@ -52,6 +56,7 @@ public class StasisRigidbody : MonoBehaviour, IStasisable
     {
         rb.isKinematic = true;
         isStasised = true;
+        stasisVFX?.Play();
         AddOutline();
     }
     public void EndStasis()

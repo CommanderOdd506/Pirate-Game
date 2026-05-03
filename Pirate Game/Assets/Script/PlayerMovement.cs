@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Events
     public static Action OnJump;
+    public static Action OnJumpVFX;
+    public static Action OnDoubleJumpVFX;
     public static Action OnDash;
     public static Action OnRoll;
 
@@ -240,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
             _timeSinceJumpPressed = jumpBuffer + 1f;
             _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
             OnJump?.Invoke();
+            OnJumpVFX?.Invoke();
         }
         else if (bufferedJump && canDoubleJump && !usingAbilities)
         {
@@ -247,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
             _timeSinceJumpPressed = jumpBuffer + 1f;
             _velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
             OnJump?.Invoke();
+            OnDoubleJumpVFX?.Invoke();
         }
 
         if (isGrounded && _velocity.y < 0f) _velocity.y = groundStickForce;
