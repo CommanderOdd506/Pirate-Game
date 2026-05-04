@@ -46,18 +46,13 @@ public class CheckpointManager : MonoBehaviour
     }
     private void Update()
     {
-        if(!doNotShowBool && timerIsRunning)
+        if (!doNotShowBool && timerIsRunning)
         {
             checkpointMessage.gameObject.SetActive(true);
             timeRemaining -= Time.deltaTime;
-            if(timeRemaining <= 0f)
-            {
+            if (timeRemaining <= 0f)
                 TimerReset();
-            }            
         }
-        else 
-            TimerReset();
-        
     }
 
     private void Start()
@@ -72,10 +67,9 @@ public class CheckpointManager : MonoBehaviour
     public void SetCheckpoint(Checkpoint checkpoint)
     {
         if (checkpoint == ActiveCheckpoint) return;
-
         ActiveCheckpoint = checkpoint;
+        if (!doNotShowBool) timerIsRunning = true;
         OnCheckpointReached?.Invoke(checkpoint);
-
         Debug.Log($"[Checkpoint] New checkpoint: {checkpoint.name}");
     }
 
