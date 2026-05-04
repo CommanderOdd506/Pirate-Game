@@ -9,6 +9,8 @@ public class ChestInteractable : MonoBehaviour, IInteract
 
     public Animator chestAnimator;
 
+    private bool activated;
+
     public void SpawnCoins()
     {
         foreach (Transform coin in coinSpots)
@@ -18,8 +20,9 @@ public class ChestInteractable : MonoBehaviour, IInteract
     }
     public void OnInteract()
     {
-        if (chestAnimator != null)
+        if (chestAnimator != null && !activated)
         {
+            activated = true;
             chestAnimator.SetTrigger("Open");
             SFXManager.instance.AudioPlayOneShot("Chest",1.4f);
         }
