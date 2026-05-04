@@ -11074,6 +11074,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1949351123}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &188120343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3514345130595693985, guid: 5f9898b94d0c31b4c87476cde6e4318f,
+    type: 3}
+  m_PrefabInstance: {fileID: 680499415}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &196188179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 60e5c2eda8697cc4cb734ad77fe3a1a0,
@@ -27799,6 +27811,11 @@ PrefabInstance:
       propertyPath: deathVignette
       value: 
       objectReference: {fileID: 680499416}
+    - target: {fileID: 8790221718739427170, guid: 9f7bb277f7722b948b294a5c27c77af9,
+        type: 3}
+      propertyPath: checkpointMessage
+      value: 
+      objectReference: {fileID: 188120343}
     - target: {fileID: 8790221718739427170, guid: 9f7bb277f7722b948b294a5c27c77af9,
         type: 3}
       propertyPath: startingCheckpoint

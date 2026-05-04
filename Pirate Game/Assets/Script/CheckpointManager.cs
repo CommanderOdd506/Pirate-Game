@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class CheckpointManager : MonoBehaviour
     public float DeathDelayTime;
     private int deaths;
 
+    private float doNotShowTime = 1f;
+    private bool doNotShowBool = true;
+    private float timeRemaining = 3f;
+    private bool timerIsRunning = false;
+
+    
+
+    public TextMeshProUGUI checkpointMessage;
+
     public int Deaths => deaths;
 
     public Checkpoint ActiveCheckpoint { get; private set; }
@@ -31,11 +41,24 @@ public class CheckpointManager : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         if (startingCheckpoint) { SetCheckpoint(startingCheckpoint); }
+
+
+    }
+    private void Update()
+    {
+        if (!doNotShowBool && timerIsRunning)
+        {
+            checkpointMessage.gameObject.SetActive(true);
+            timeRemaining -= Time.deltaTime;
+            if (timeRemaining <= 0f)
+                TimerReset();
+        }
     }
 
     private void Start()
     {
         deaths = 0;
+        StartCoroutine(StartDelay());
     }
     /// <summary>
     /// Called by a Checkpoint when the player enters it.
@@ -44,10 +67,9 @@ public class CheckpointManager : MonoBehaviour
     public void SetCheckpoint(Checkpoint checkpoint)
     {
         if (checkpoint == ActiveCheckpoint) return;
-
         ActiveCheckpoint = checkpoint;
+        if (!doNotShowBool) timerIsRunning = true;
         OnCheckpointReached?.Invoke(checkpoint);
-
         Debug.Log($"[Checkpoint] New checkpoint: {checkpoint.name}");
     }
 
@@ -91,5 +113,19 @@ public class CheckpointManager : MonoBehaviour
 
         OnPlayerRespawn?.Invoke();
 
+    }
+
+    private IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(doNotShowTime);
+
+        doNotShowBool = false;
+    }
+
+    private void TimerReset()
+    {
+        checkpointMessage.gameObject.SetActive(false);
+        timeRemaining = 3f;
+        timerIsRunning = false;
     }
 }
